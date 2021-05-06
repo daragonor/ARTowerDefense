@@ -1,0 +1,75 @@
+{
+    "missions": [
+        {
+            "difficulty": 1,
+            "waves": 1,
+            "maps": [
+                {
+                    "matrix": [
+                        [0, 1, 5, 0, 0],
+                        [0, 0, 5, 0, 0],
+                        [0, 5, 5, 5, 0],
+                        [0, 0, 2, 5, 0],
+                        [0, 5, 5, 5, 0],
+                        [0, 0, 5, 5, 4]
+                    ]
+                }
+            ]
+        },
+        {
+            "difficulty": 2,
+            "waves": 7,
+            "maps": [
+                {
+                    "matrix": [
+                        [4, 5, 5, 0, 0, 1, 0, 0],
+                        [0, 0, 5, 0, 0, 5, 0, 0],
+                        [0, 0, 6, 0, 0, 5, 0, 0],
+                        [0, 6, 6, 6, 5, 5, 0, 0],
+                        [0, 6, 3, 0, 2, 5, 0, 0],
+                        [0, 6, 6, 5, 5, 5, 0, 0],
+                        [0, 6, 0, 0, 0, 5, 5, 4],
+                        [0, 5, 0, 0, 0, 0, 0, 0],
+                        [0, 4, 0, 0, 0, 0, 0, 0]
+                    ]
+                }
+            ]
+        }
+    ],
+    "enciclopedia": {
+        "towers": [
+            {
+                "image": "tower-turret",
+                "type": "Turret",
+                "damage": "Regular",
+                "speed": "Fast",
+                "range": "Close",
+                "description": "This tower fires in a straight direction and only on the same hieghy"
+            },
+            {
+                "image": "tower-launcher",
+                "type": "Bomb Launcher",
+                "damage": "High",
+                "speed": "Slow",
+                "range": "Wide",
+                "description": "This tower fires in all directions and more than one objective at the time, it can also hit creeps on higher or lower heights"
+            }
+        ],
+        "creeps": [
+            {
+                "image": "clockwise-rotation",
+                "type": "Normal",
+                "speed": "Regular",
+                "resistance": "Regular",
+                "description": "This creep is a well balanced unit"
+            },
+            {
+                "image": "anticlockwise-rotation",
+                "type": "Heavy",
+                "speed": "Slow",
+                "resistance": "Tough",
+                "description": "This creep is a heavy mountain, make sure to get rid of them as soon as possible"
+            }
+        ]
+    }
+}

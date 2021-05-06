@@ -48,5 +48,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This application synchronises with other iOS devices on the same network.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_helper-test._tcp</string>
+		<string>_helper-test._udp</string>
+	</array>
 </dict>
 </plist>
