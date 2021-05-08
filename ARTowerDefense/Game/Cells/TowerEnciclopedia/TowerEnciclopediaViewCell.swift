@@ -9,7 +9,7 @@ import UIKit
 
 class TowerEnciclopediaViewCell: UITableViewCell, CellProtocol {
     struct ViewModel: CellViewModelProtocol, MenuCellViewModelProtocol {
-        var identifier: String = "Tower Enciclopedia Cell"
+        var identifier: String = "TowerEnciclopediaViewCell"
         var image: String
         var type: String
         var damage: String

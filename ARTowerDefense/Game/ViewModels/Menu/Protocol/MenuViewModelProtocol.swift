@@ -10,6 +10,6 @@ import Combine
 
 protocol MenuViewModelProtocol {
     var viewStatePublisher: Published<MenuViewState>.Publisher { get }
-    func toStartMenu()
+    func presentMenu()
 }
 

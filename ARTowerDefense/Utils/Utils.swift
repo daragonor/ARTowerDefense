@@ -110,6 +110,12 @@ extension UUID {
     }
 }
 
+extension UITableView {
+    public func register<T: UITableViewCell>(_ cellClass: T.Type) {
+        register(UINib(nibName: String(describing: cellClass), bundle: nil), forCellReuseIdentifier: String(describing: cellClass))
+    }
+}
+
 class CardView: UIView {
     @IBInspectable var cornerRadius: CGFloat = 15
     @IBInspectable var borderWidth: CGFloat = 3

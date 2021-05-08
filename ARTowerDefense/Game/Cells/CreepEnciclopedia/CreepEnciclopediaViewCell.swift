@@ -9,7 +9,7 @@ import UIKit
 
 class CreepEnciclopediaViewCell: UITableViewCell, CellProtocol {
     struct ViewModel: CellViewModelProtocol, MenuCellViewModelProtocol {
-        var identifier: String = "Creep Enciclopedia Cell"
+        var identifier: String = "CreepEnciclopediaViewCell"
         var image: String
         var type: String
         var speed: String

@@ -35,10 +35,19 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupObservables()
+        setupMenuTableView()
     }
     
     func setupUI() {
         gameInfoStackView.isHidden = true
+    }
+    
+    func setupMenuTableView() {
+        menuTableView.register(CreepEnciclopediaViewCell.self)
+        menuTableView.register(TowerEnciclopediaViewCell.self)
+        menuTableView.register(MenuTableViewCell.self)
+        menuTableView.register(HeaderTableViewCell.self)
+        menuTableView.register(SettingsViewCell.self)
     }
     
     func setupObservables() {
@@ -56,6 +65,6 @@ class GameViewController: UIViewController {
                 }
             }
         }.store(in: &cancellables)
-        menuViewModel.toStartMenu()
+        menuViewModel.presentMenu()
     }
 }

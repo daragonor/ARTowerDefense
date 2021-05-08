@@ -9,7 +9,7 @@ import UIKit
 
 class HeaderTableViewCell: UITableViewCell, CellProtocol  {
     struct ViewModel: MenuCellViewModelProtocol {
-        var identifier: String = "Header Cell"
+        var identifier: String = "HeaderTableViewCell"
         var contentHeight: Float = 300.0
     }
     func setup(with viewModel: CellViewModelProtocol) {}

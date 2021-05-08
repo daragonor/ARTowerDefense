@@ -9,7 +9,7 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell, CellProtocol {
     struct ViewModel: CellViewModelProtocol, MenuCellViewModelProtocol {
-        var identifier: String = "Menu Cell"
+        var identifier: String = "MenuTableViewCell"
         var title: String
         var contentHeight: Float = 50.0
         var onTap: () -> Void

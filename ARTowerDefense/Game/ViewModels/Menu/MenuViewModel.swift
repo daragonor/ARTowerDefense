@@ -24,7 +24,11 @@ class MenuViewModel {
 }
 
 extension MenuViewModel: MenuViewModelProtocol {
-    func toStartMenu() {
+    func toMission(index: Int) {
+        
+    }
+    
+    func presentMenu() {
         viewState = .showContext(getStartMenu())
     }
     
@@ -45,8 +49,17 @@ extension MenuViewModel: MenuViewModelProtocol {
     }
     
     func toMultiplayer() {
+        viewState = .showContext(getMultiplayer())
+    }
+    
+    func toMultiplayerCoop() {
         
     }
+    
+    func toMultiplayerSpectator() {
+    
+    }
+
     
     func toMissions() {
         viewState = .showContext(getMissions())
@@ -90,32 +103,51 @@ extension MenuViewModel {
         let missions = config.missions.enumerated().map { (index, mission) in
             return MenuTableViewCell.ViewModel(
                     title: "Mission \(index + 1)",
-                    onTap: { self.toMainMenu() })
+                onTap: { [weak self] in self?.toMission(index: index) })
         }
         return missions + [
             MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: { self.toMainMenu() })
+                onTap: toMainMenu)
         ]
     }
-    func getSettings() -> [MenuCellViewModelProtocol] {
+    
+    func getMultiplayer() -> [MenuCellViewModelProtocol] {
         return [
             MenuTableViewCell.ViewModel(
+                title: "Co-op",
+                onTap: toMultiplayerCoop),
+            MenuTableViewCell.ViewModel(
+                title: "Spectator",
+                onTap: toMultiplayerSpectator),
+            MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: { self.toMainMenu() })
+                onTap: toMainMenu)
         ]
     }
+    
+    func getSettings() -> [MenuCellViewModelProtocol] {
+        return [
+            SettingsViewCell.ViewModel(
+                title: "Sound",
+                preference: .sound),
+            MenuTableViewCell.ViewModel(
+                title: "Back",
+                onTap: toMainMenu)
+        ]
+    }
+    
     func getEnciclopedia() -> [MenuCellViewModelProtocol] {
         return [
             MenuTableViewCell.ViewModel(
                 title: "Towers",
-                onTap: { self.toTowersEnciclopedia() }),
+                onTap: toTowersEnciclopedia),
             MenuTableViewCell.ViewModel(
                 title: "Creeps",
-                onTap: { self.toCreepsEnciclopedia() }),
+                onTap: toCreepsEnciclopedia),
             MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: { self.toMainMenu() })
+                onTap: toMainMenu)
         ]
     }
     func getTowersEnciclopedia() -> [MenuCellViewModelProtocol] {
@@ -131,7 +163,7 @@ extension MenuViewModel {
         return entries + [
             MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: { self.toEnciclopedia() })
+                onTap: toEnciclopedia)
         ]
     }
     
@@ -147,7 +179,7 @@ extension MenuViewModel {
         return entries + [
             MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: { self.toEnciclopedia() })
+                onTap: toEnciclopedia)
         ]
     }
 }
