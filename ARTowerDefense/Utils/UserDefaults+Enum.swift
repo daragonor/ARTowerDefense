@@ -9,5 +9,5 @@ import Foundation
 
 enum SettingsPreferences: String {
     case sound
-    var key: String { self.rawValue }
+    var key: String { self.rawValue }
 }

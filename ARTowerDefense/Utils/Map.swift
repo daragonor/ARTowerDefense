@@ -102,39 +102,6 @@ enum Direction: CaseIterable {
     }
 }
 
-struct GameConfig: Codable {
-    var missions: [MissionModel]
-    var enciclopedia: Enciclopedia
-}
-
-struct Enciclopedia: Codable {
-    var towers: [TowerEnciclopedia]
-    var creeps: [CreepEnciclopedia]
-}
-
-struct TowerEnciclopedia: Codable {
-    var image: String
-    var type: String
-    var damage: String
-    var speed: String
-    var range: String
-    var description: String
-}
-
-struct CreepEnciclopedia: Codable {
-    var image: String
-    var type: String
-    var speed: String
-    var resistance: String
-    var description: String
-}
-
-struct MissionModel: Codable {
-    var difficulty: Int
-    var waves: Int
-    var maps: [MapModel]
-}
-
 typealias Position = (row: Int, column: Int)
 typealias OrientedPosition = (position: Position, direction: Direction, mapLegend: MapLegend)
 typealias OrientedCoordinate = (coordinate: SIMD3<Float>, angle: Float, position: Position, mapLegend: MapLegend)

@@ -40,7 +40,15 @@ extension String {
         let range = NSRange(location: 0, length: count)
         return regex?.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1_$2")
     }
+    
+    func snakeCasetoCamelCase() -> String {
+        split(separator: "_").enumerated().map { (index, element) in
+            index > 0 ? String(element).capitalized : String(element)
+        }.joined() // better than `reduce`
+    }
 }
+
+
 
 extension Optional {
     var isNil: Bool {

@@ -9,12 +9,6 @@ import Foundation
 enum MenuViewState {
     case empty
     case showContext(_ context: [CellViewModelProtocol & MenuCellViewModelProtocol])
-}
-
-enum MenuRow: String, CaseIterable {
-    case menu, missions, lobby, settings, enciclopedia
-}
-
-enum EnciclopediaType: String, CaseIterable {
-    case towers, creeps
+    case startMission(mission: Int)
+    case setGameConfiguration(config: GameConfig)
 }

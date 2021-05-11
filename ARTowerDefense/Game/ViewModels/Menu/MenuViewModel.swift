@@ -18,14 +18,17 @@ class MenuViewModel {
         config = {
             let filePath = Bundle.main.path(forResource: "config", ofType: "json")!
             let data = try! NSData(contentsOfFile: filePath) as Data
-            return try! JSONDecoder().decode(GameConfig.self, from: data)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try! decoder.decode(GameConfig.self, from: data)
         }()
+        viewState = .setGameConfiguration(config: config)
     }
 }
 
 extension MenuViewModel: MenuViewModelProtocol {
     func toMission(index: Int) {
-        
+        viewState = .startMission(mission: index)
     }
     
     func presentMenu() {
@@ -59,7 +62,6 @@ extension MenuViewModel: MenuViewModelProtocol {
     func toMultiplayerSpectator() {
     
     }
-
     
     func toMissions() {
         viewState = .showContext(getMissions())
