@@ -11,5 +11,6 @@ import Combine
 protocol MenuViewModelProtocol {
     var viewStatePublisher: Published<MenuViewState>.Publisher { get }
     func presentMenu()
+    func toMissions()
 }
 

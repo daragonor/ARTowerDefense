@@ -204,7 +204,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Action Strip Cell" id="5ya-nT-PsT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StripViewCell" id="5ya-nT-PsT" customClass="StripViewCell" customModule="ARTowerDefense" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="69" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ya-nT-PsT" id="Q3L-Jg-tru">
@@ -248,6 +248,11 @@
                                                 <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="imageView" destination="dP6-Mt-iyt" id="3Jb-fG-Zre"/>
+                                            <outlet property="stripImageView" destination="dP6-Mt-iyt" id="whQ-Be-E0h"/>
+                                            <outlet property="titleLabel" destination="Iax-zc-SWv" id="COd-LN-R87"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

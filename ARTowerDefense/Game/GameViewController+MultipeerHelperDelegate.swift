@@ -19,5 +19,22 @@ extension GameViewController: MultipeerHelperDelegate {
 //    ) -> Bool {
 //        GameViewController.checkPeerToken(with: discoveryInfo)
 //    }
+    
+    func setupMultipeerHelper() {
+        multipeerHelper = MultipeerHelper(
+            serviceName: "helper-test",
+            sessionType: .both,
+            delegate: self
+        )
+        
+        // MARK: - Setting RealityKit Synchronization
+        
+        guard let syncService = multipeerHelper.syncService else {
+            fatalError("could not create multipeerHelp.syncService")
+        }
+        
+        arView.scene.synchronizationService = syncService
+        
+    }
 }
 

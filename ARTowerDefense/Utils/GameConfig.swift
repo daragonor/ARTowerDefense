@@ -46,4 +46,6 @@ struct ConfigInitialValues: Codable {
     var waveInterval: Float
     var coins: Int
     var playerHp: Int
+    var graceTime: Int
+    var creepsPerWave: Int
 }

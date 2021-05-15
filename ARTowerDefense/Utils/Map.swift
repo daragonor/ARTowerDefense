@@ -10,28 +10,6 @@ import Foundation
 import RealityKit
 import GameplayKit
 
-enum StripOption: String, CaseIterable {
-//    case refund
-    case upgrade, sell, turret, launcher, barracks, rotateRight, rotateLeft, undo, start
-    var key: String {
-        return self.rawValue
-    }
-    var iconImage: UIImage {
-        switch self {
-        case .upgrade: return #imageLiteral(resourceName: "upgrade")
-        case .sell: return #imageLiteral(resourceName: "coins")
-        case .turret: return #imageLiteral(resourceName: "tower-turret")
-        case .launcher: return #imageLiteral(resourceName: "tower-launcher")
-        case .barracks: return #imageLiteral(resourceName: "tower-barracks")
-        case .rotateRight: return #imageLiteral(resourceName: "clockwise-rotation")
-        case .rotateLeft: return #imageLiteral(resourceName: "anticlockwise-rotation")
-        case .undo: return #imageLiteral(resourceName: "cancel")
-        case .start: return #imageLiteral(resourceName: "start")
-        }
-    }
-}
-
-
 enum MapLegend: CaseIterable {
     case neutral, goal, lowerPlacing, higherPlacing, spawn, lowerPath, higherPath, zipLineIn, zipLineOut
 }
@@ -117,6 +95,7 @@ struct MapModel: Codable {
     enum CodingKeys: String, CodingKey {
         case matrix
     }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         matrix = try values.decode([[Int]].self, forKey: .matrix)
@@ -134,6 +113,7 @@ struct MapModel: Codable {
             moveTo((spawn, .down, .spawn), path: [])
         }
     }
+    
     mutating func moveTo(_ orientedPosition: OrientedPosition, path: [OrientedPosition]) {
         var path = path
         let current = orientedPosition.position
