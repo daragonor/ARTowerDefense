@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C131183264FDD910056ABE8 /* StripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C131182264FDD910056ABE8 /* StripViewCell.swift */; };
 		7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */; };
 		7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */; };
 		7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C131182264FDD910056ABE8 /* StripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripViewCell.swift; sourceTree = "<group>"; };
 		7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TowerEnciclopediaViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -155,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C131181264FDD6F0056ABE8 /* Strip */ = {
+			isa = PBXGroup;
+			children = (
+				7C131182264FDD910056ABE8 /* StripViewCell.swift */,
+			);
+			path = Strip;
+			sourceTree = "<group>";
+		};
 		7C8B4B4F2646C1650073BCAE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,10 +319,10 @@
 			isa = PBXGroup;
 			children = (
 				7C8D5C2A263DA9020016D837 /* config.json */,
+				7C8B4B772646E1A20073BCAE /* GameConfig.swift */,
 				7C8D5C2B263DA9020016D837 /* Map.swift */,
 				7C8D5C28263DA9020016D837 /* Utils.swift */,
 				7C8B4B542646CB3E0073BCAE /* UserDefaults+Enum.swift */,
-				7C8B4B772646E1A20073BCAE /* GameConfig.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -329,6 +339,7 @@
 		7C8D5C40263DDE3A0016D837 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7C131181264FDD6F0056ABE8 /* Strip */,
 				7C8D5C41263DDE3E0016D837 /* Protocol */,
 				7C8B4B4F2646C1650073BCAE /* Settings */,
 				7C8D5C57264461250016D837 /* CreepEnciclopedia */,
@@ -529,6 +540,7 @@
 				7C8D5C522640AFC00016D837 /* GameViewModel.swift in Sources */,
 				7C8D5C35263DA9360016D837 /* TowerBundle.swift in Sources */,
 				7C8D5C43263DDE4F0016D837 /* CellProtocol.swift in Sources */,
+				7C131183264FDD910056ABE8 /* StripViewCell.swift in Sources */,
 				7C8D5C30263DA9280016D837 /* ModelBundle.swift in Sources */,
 				7C8D5C592644697F0016D837 /* TowerEnciclopediaViewCell.swift in Sources */,
 				7C8D5C4B2640798C0016D837 /* HeaderTableViewCell.swift in Sources */,

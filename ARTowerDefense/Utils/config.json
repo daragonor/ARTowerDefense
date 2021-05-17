@@ -1,9 +1,11 @@
 {
     "initial_values": {
         "grid_diameter": 0.5,
-        "wave_interval": 10.0,
+        "wave_interval": 15.0,
         "coins": 500,
         "player_hp": 10,
+        "grace_time": 10,
+        "creeps_per_wave": 10
     },
     "missions": [
         {
