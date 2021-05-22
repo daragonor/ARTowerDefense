@@ -27,8 +27,8 @@ class MenuViewModel {
 }
 
 extension MenuViewModel: MenuViewModelProtocol {
-    func toMission(index: Int) {
-        viewState = .startMission(mission: index)
+    func toMission(index: Int, connected: Bool) {
+        viewState = .startMission(mission: index, connected: connected)
     }
     
     func presentMenu() {
@@ -51,7 +51,7 @@ extension MenuViewModel: MenuViewModelProtocol {
         viewState = .showContext(getCreepsEnciclopedia())
     }
     
-    func toMultiplayer() {
+    func toMultiplayerMenu() {
         viewState = .showContext(getMultiplayer())
     }
     
@@ -59,12 +59,16 @@ extension MenuViewModel: MenuViewModelProtocol {
         
     }
     
+    func fetchConnectedPeers() {
+        viewState = .fetchConnectedPeers
+    }
+    
     func toMultiplayerSpectator() {
     
     }
     
-    func toMissions() {
-        viewState = .showContext(getMissions())
+    func toMissions(connected: Bool) {
+        viewState = .showContext(getMissions(connected))
     }
     
     func toSettings() {
@@ -88,10 +92,10 @@ extension MenuViewModel {
         return [
             MenuTableViewCell.ViewModel(
                 title: "Missions",
-                onTap: toMissions),
+                onTap: { self.toMissions(connected: false) }),
             MenuTableViewCell.ViewModel(
                 title: "Multiplayer",
-                onTap: toMultiplayer),
+                onTap: toMultiplayerMenu),
             MenuTableViewCell.ViewModel(
                 title: "Settings",
                 onTap: toSettings),
@@ -101,27 +105,30 @@ extension MenuViewModel {
         ]
     }
     
-    func getMissions() -> [MenuCellViewModelProtocol] {
+    func getMissions(_ connected: Bool) -> [MenuCellViewModelProtocol] {
         let missions = config.missions.enumerated().map { (index, mission) in
             return MenuTableViewCell.ViewModel(
                     title: "Mission \(index + 1)",
-                onTap: { [weak self] in self?.toMission(index: index) })
+                onTap: { [weak self] in self?.toMission(index: index, connected: connected) })
         }
         return missions + [
             MenuTableViewCell.ViewModel(
                 title: "Back",
-                onTap: toMainMenu)
+                onTap:  connected ? toMultiplayerMenu : toMainMenu)
         ]
     }
     
     func getMultiplayer() -> [MenuCellViewModelProtocol] {
         return [
             MenuTableViewCell.ViewModel(
+                title: "Host",
+                onTap: { self.toMissions(connected: true) }),
+            MenuTableViewCell.ViewModel(
                 title: "Co-op",
-                onTap: toMultiplayerCoop),
+                onTap: fetchConnectedPeers),
             MenuTableViewCell.ViewModel(
                 title: "Spectator",
-                onTap: toMultiplayerSpectator),
+                onTap: fetchConnectedPeers),
             MenuTableViewCell.ViewModel(
                 title: "Back",
                 onTap: toMainMenu)

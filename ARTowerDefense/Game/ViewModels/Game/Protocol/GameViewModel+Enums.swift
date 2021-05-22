@@ -12,12 +12,12 @@ enum GameViewState {
     case empty
     case enableFocusView
     case disableFocusView
-    case returnToMenu
+    case returnToMenu(connected: Bool)
     case updateStripe(context: [CellViewModelProtocol])
     case updateCoins(_ coins: Int)
     case updateHP(_ hp: Int)
     case updateWaves(value: String)
-    case loadAnchorConfiguration
+    case loadAnchorConfiguration(_ connected: Bool)
     case showLoadingAssets
     case hideLoadingAssets
     case showMissionCompleted

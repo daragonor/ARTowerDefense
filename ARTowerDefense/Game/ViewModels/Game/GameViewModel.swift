@@ -20,7 +20,7 @@ class GameViewModel {
     var usedMaps: Int = .init()
     var playerHp: Int = .init()
     var coins: Int = .init()
-    var currentMission: Int = .init()
+    var currentMission: Int?
 
     var terrainAnchors: [AnchorEntity] = .init()
     var selectedPlacing: PlacingBundle?
@@ -32,7 +32,7 @@ class GameViewModel {
     var towers: [UInt64 : TowerBundle] = .init()
     var troops: [UInt64 : TroopBundle] = .init()
     var ammo: [UInt64 : AmmoBundle] = .init()
-
+    var networkStatus: Bool = false
     private var cancellables: Set<AnyCancellable> = .init()
     private var arView: ARView!
     var gameTimer: Timer?
@@ -53,7 +53,7 @@ extension GameViewModel: GameViewModelProtocol {
         terrainAnchor.anchoring = AnchoringComponent(arAnchor)
         arView.scene.addAnchor(terrainAnchor)
         arView.session.add(anchor: arAnchor)
-        let maps = config.missions[currentMission].maps
+        let maps = config.missions[currentMission!].maps
         insertMap(anchor: terrainAnchor, map: maps[usedMaps])
         usedMaps += 1
         if maps.count == usedMaps {
@@ -88,6 +88,7 @@ extension GameViewModel: GameViewModelProtocol {
     
     func cleanValues() {
         terrainAnchors.forEach { terrain in terrain.removeFromParent() }
+        currentMission = nil
         //limpiar todos los arreglos
         spawnPlaces = []
         creeps = [:]
@@ -95,16 +96,17 @@ extension GameViewModel: GameViewModelProtocol {
         towers = [:]
         troops = [:]
         ammo = [:]
-        viewState = .returnToMenu
+        viewState = .returnToMenu(connected: networkStatus)
     }
     
     func setGameConfig(_ config: GameConfig) {
         self.config = config
     }
     
-    func loadMission(_ mission: Int) {
+    func loadMission(_ mission: Int, _ connected: Bool) {
         updateInitialValues(for: mission)
-        loadTemplatesIfNeeded()
+        networkStatus = connected
+        loadTemplatesIfNeeded(connected)
         enableFocusView()
     }
     
@@ -165,7 +167,8 @@ private extension GameViewModel {
             if graceTimer >= 0 {
                 self.viewState = .updateWaves(value: "0:\(graceTimer < 10 ? "0" : "")\(graceTimer)")
                 if graceTimer == 0 {
-                    self.viewState = .updateWaves(value: "\(self.waveCount)/\(graceTimer)")
+                    self.waveCount += 1
+                    self.viewState = .updateWaves(value: "\(self.waveCount)/\(self.config.missions[self.currentMission!].waves)")
                     self.sendWave()
                 }
                 graceTimer -= 1
@@ -178,9 +181,8 @@ private extension GameViewModel {
     }
     
     func sendWave() {
-        waveCount += 1
         for spawn in spawnPlaces {
-            let paths = config.missions[currentMission].maps[spawn.map].creepPathsCoordinates(at: spawn.position,diameter: config.initialValues.gridDiameter)
+            let paths = config.missions[currentMission!].maps[spawn.map].creepPathsCoordinates(at: spawn.position,diameter: config.initialValues.gridDiameter)
             var count = 0
             let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 guard count < 2 else { timer.invalidate() ; return }
@@ -258,18 +260,18 @@ private extension GameViewModel {
         self.viewState = .updateWaves(value: "0/\(config.missions[mission].waves)")
     }
     
-    func loadTemplatesIfNeeded() {
-        guard templates.isEmpty else { return }
+    func loadTemplatesIfNeeded(_ connected: Bool) {
+        guard templates.isEmpty else {
+            viewState = .loadAnchorConfiguration(connected)
+            return
+        }
         var loadedModels: Int = .zero
         viewState = .showLoadingAssets
         var modelNames = ModelType.allCases.map { $0.key }
         modelNames += CreepType.allCases.map { $0.key }
         modelNames += LevelType.allCases.map { $0.key }
         modelNames += NeutralType.allCases.map { $0.key }
-        modelNames += TowerType.allCases.map {
-            type in TowerLevel.allCases.map {
-                lvl in type.key(lvl) } }
-            .joined()
+        modelNames += TowerType.allCases.map { type in TowerLevel.allCases.map { lvl in type.key(lvl) } }.joined()
         
         for name in modelNames {
             ModelEntity.loadAsync(named: name).sink(
@@ -282,7 +284,8 @@ private extension GameViewModel {
                             self.templates[lifepoint.key] = ModelEntity(mesh: .generateBox(size: SIMD3(x: 0.003, y: 0.0005, z: 0.0005), cornerRadius: 0.0002), materials: [SimpleMaterial(color: lifepoint.color, isMetallic: false)])
                         }
                         self.viewState = .hideLoadingAssets
-                        self.viewState = .loadAnchorConfiguration
+                        self.viewState = .loadAnchorConfiguration(connected)
+
                     }
                     let factor =
                         ModelType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
@@ -302,7 +305,7 @@ private extension GameViewModel {
         let columns = map.matrix.first!.count
         var neutralCount = 0
         var higherPathCount = 0
-        var lowerPathCount = 0
+//        var lowerPathCount = 0
         for row in 0..<rows {
             for column in 0..<columns {
                 let rowDistance = Float(rows / 2) - config.initialValues.gridDiameter
@@ -464,7 +467,7 @@ private extension GameViewModel {
                         default: return LevelType.lvl04_higherbase001.key
                         }
                     }()
-                    let placing = templates[higherPlacingKey]!.embeddedModel(at: [x, 0.001, z])
+                    let placing = templates[higherPlacingKey]!.embeddedModel(at: [x, 0.1, z])
                     let bounds = placing.entity.visualBounds(relativeTo: placing.model)
                     placing.model.collision = CollisionComponent(shapes: [ShapeResource.generateBox(size: bounds.extents).offsetBy(translation: bounds.center)])
                     anchor.addChild(placing.model)
@@ -479,7 +482,7 @@ private extension GameViewModel {
     }
     
     func checkMissionCompleted() {
-        if creeps.isEmpty, waveCount == config.missions[currentMission].waves {
+        if creeps.isEmpty, waveCount == config.missions[currentMission!].waves {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.viewState = .showMissionCompleted
             }
@@ -525,8 +528,8 @@ extension GameViewModel {
             let endSubs = arView.scene.subscribe(to: CollisionEvents.Ended.self, on: tower.model) {
                 event in
                 guard let tower = self.towers[event.entityA.id] else { return }
-                guard let creep = event.entityB as? ModelEntity else { return }
-                tower.enemiesIds.removeAll(where: { $0 == creep.id })
+                guard let creep = self.creeps[event.entityB.id] else { return }
+                tower.enemiesIds.removeAll(where: { $0 == creep.model.id })
             }
             
             let beganSubs = arView.scene.subscribe(to: CollisionEvents.Began.self, on: tower.model) {

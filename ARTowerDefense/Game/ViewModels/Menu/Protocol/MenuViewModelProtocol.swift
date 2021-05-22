@@ -7,10 +7,12 @@
 
 import Foundation
 import Combine
+import MultipeerConnectivity
 
 protocol MenuViewModelProtocol {
     var viewStatePublisher: Published<MenuViewState>.Publisher { get }
     func presentMenu()
-    func toMissions()
+    func toMissions(connected: Bool)
+    func toMission(index: Int, connected: Bool)
 }
 
