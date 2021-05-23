@@ -37,7 +37,7 @@ struct CreepEnciclopedia: Codable {
 
 struct MissionModel: Codable {
     var difficulty: Int
-    var waves: Int
+    var waves: [[Int]]
     var maps: [MapModel]
 }
 
@@ -47,5 +47,4 @@ struct ConfigInitialValues: Codable {
     var coins: Int
     var playerHp: Int
     var graceTime: Int
-    var creepsPerWave: Int
 }

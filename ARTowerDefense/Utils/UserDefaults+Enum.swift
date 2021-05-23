@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 enum SettingsPreferences: String {
     case sound

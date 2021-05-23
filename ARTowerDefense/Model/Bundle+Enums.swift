@@ -27,7 +27,7 @@ enum ModelType: String, CaseIterable {
 }
 
 enum CreepType: String, CaseIterable {
-    case heavy, regular, small, flying
+    case small, regular, heavy, flying
     
     var key: String {
         return self.rawValue.camelCaseToSnakeCase()

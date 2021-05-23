@@ -39,11 +39,10 @@ extension GameViewController: MultipeerHelperDelegate {
             guard let data = try? JSONEncoder().encode(encodedableModel) else { return }
             multipeerHelper.sendToAllPeers(data)
         case .recieveMission:
-            guard let params = decodedModel.parameters, let mission = try? JSONDecoder().decode(Int.self, from: params) else { return }
             DispatchQueue.main.async { [weak self] in
                 self?.dismiss(animated: false, completion: nil)
             }
-            
+            guard let params = decodedModel.parameters, let mission = try? JSONDecoder().decode(Int.self, from: params) else { return }
             menuViewModel.toMission(index: mission, connected: true)
         }
     }

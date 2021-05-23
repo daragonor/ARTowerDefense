@@ -45,6 +45,7 @@ class GameViewController: UIViewController {
         setupGameObservables()
         setupMenuTableView()
         setupStrip()
+        arView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(_:))))
     }
     
     func setupUI() {
@@ -138,6 +139,7 @@ class GameViewController: UIViewController {
                 }
             case .loadAnchorConfiguration(let connected):
                 self.loadAnchorConfiguration(connected)
+                self.gameViewModel.enableFocusView()
             case .updateCoins(let coins):
                 self.coinsLabel.text = "\(coins)"
             case .updateHP(let lifepoints):
@@ -173,11 +175,9 @@ class GameViewController: UIViewController {
 //        if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
 //            arConfig.frameSemantics.insert(.personSegmentationWithDepth)
 //        }
-        arView.renderOptions.insert(.disableMotionBlur)
         arConfig.isCollaborationEnabled = connected
-        arView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap(_:))))
+        
         arView.session.run(arConfig)
-        gameViewModel.enableFocusView()
     }
     
     @objc

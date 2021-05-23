@@ -161,15 +161,15 @@ private extension GameViewModel {
         var graceTimer = config.initialValues.graceTime
         var waveInterval = config.initialValues.waveInterval
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
+            guard let self = self, let mission = self.currentMission else { return }
             self.coins += 5
             self.viewState = .updateCoins(self.coins)
             if graceTimer >= 0 {
                 self.viewState = .updateWaves(value: "0:\(graceTimer < 10 ? "0" : "")\(graceTimer)")
                 if graceTimer == 0 {
+                    self.sendWaves(mission: mission, wave: self.waveCount)
                     self.waveCount += 1
-                    self.viewState = .updateWaves(value: "\(self.waveCount)/\(self.config.missions[self.currentMission!].waves)")
-                    self.sendWave()
+                    self.viewState = .updateWaves(value: "\(self.waveCount + 1)/\(self.config.missions[mission].waves.count)")
                 }
                 graceTimer -= 1
             } else {
@@ -180,14 +180,14 @@ private extension GameViewModel {
         gameTimer?.fire()
     }
     
-    func sendWave() {
+    func sendWaves(mission: Int, wave: Int) {
         for spawn in spawnPlaces {
-            let paths = config.missions[currentMission!].maps[spawn.map].creepPathsCoordinates(at: spawn.position,diameter: config.initialValues.gridDiameter)
+            let missionConfig = config.missions[mission]
+            let paths = missionConfig.maps[spawn.map].creepPathsCoordinates(at: spawn.position,diameter: config.initialValues.gridDiameter)
             var count = 0
             let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                guard count < 2 else { timer.invalidate() ; return }
-                count += 1
-                let creepType = CreepType.allCases[self.waveCount % CreepType.allCases.count]
+                guard count < missionConfig.waves[wave].count else { timer.invalidate() ; return }
+                let creepType = CreepType.allCases[missionConfig.waves[wave][count]]
                 let creep: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
                 creep.model.position.y += 0.03
                 let bounds = creep.entity.visualBounds(relativeTo: creep.model)
@@ -198,6 +198,7 @@ private extension GameViewModel {
                 creepHPbar.position.y = (bounds.extents.y / 2) + 0.003
                 self.creeps[creep.model.id] = CreepBundle(bundle: creep, hpBarId: creepHPbar.id, type: creepType, animation: nil, subscription: nil)
                 creep.entity.playAnimation(creep.entity.availableAnimations[0].repeat())
+                count += 1
                 self.deployUnit(creep.model, type: creepType,speed: creepType.speed, on: paths[self.waveCount % paths.count], setScale: 10)
             }
             timer.fire()
@@ -257,7 +258,7 @@ private extension GameViewModel {
         self.usedMaps = .zero
         self.viewState = .updateCoins(config.initialValues.coins)
         self.viewState = .updateHP(config.initialValues.playerHp)
-        self.viewState = .updateWaves(value: "0/\(config.missions[mission].waves)")
+        self.viewState = .updateWaves(value: "0/\(config.missions[mission].waves.count)")
     }
     
     func loadTemplatesIfNeeded(_ connected: Bool) {
@@ -482,7 +483,7 @@ private extension GameViewModel {
     }
     
     func checkMissionCompleted() {
-        if creeps.isEmpty, waveCount == config.missions[currentMission!].waves {
+        if creeps.isEmpty, waveCount == config.missions[currentMission!].waves.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.viewState = .showMissionCompleted
             }
