@@ -43,7 +43,9 @@ extension GameViewController: MultipeerHelperDelegate {
                 self?.dismiss(animated: false, completion: nil)
             }
             guard let params = decodedModel.parameters, let mission = try? JSONDecoder().decode(Int.self, from: params) else { return }
-            menuViewModel.toMission(index: mission, connected: true)
+            DispatchQueue.main.async { [weak self] in
+                self?.menuViewModel.toMission(index: mission, connected: true)
+            }
         }
     }
     func setupMultipeerHelper() {

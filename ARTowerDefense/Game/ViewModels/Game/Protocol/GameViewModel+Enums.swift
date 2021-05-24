@@ -21,6 +21,7 @@ enum GameViewState {
     case showLoadingAssets
     case hideLoadingAssets
     case showMissionCompleted
+    case startMission
 }
 
 enum StripOption {

@@ -214,19 +214,19 @@ enum TowerType: String, CaseIterable {
         case .lvl1:
             switch self {
             case .turret: return 5
-            case .launcher: return 20
+            case .launcher: return 10
             case .barracks: return 20
             }
         case .lvl2:
             switch self {
-            case .turret: return 15
-            case .launcher: return 30
+            case .turret: return 10
+            case .launcher: return 20
             case .barracks: return 30
             }
         case .lvl3:
             switch self {
-            case .turret: return 25
-            case .launcher: return 40
+            case .turret: return 15
+            case .launcher: return 30
             case .barracks: return 40
             }
         }

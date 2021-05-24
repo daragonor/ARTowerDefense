@@ -12,10 +12,9 @@ import RealityKit
 import Combine
 
 class CreepBundle: UnitBundle {
-    internal init(bundle: ModelBundle, hpBarId: UInt64, type: CreepType, animation: AnimationPlaybackController? = nil, subscription: Cancellable? = nil) {
+    internal init(bundle: ModelBundle, hpBarId: UInt64, type: CreepType, animation: AnimationPlaybackController? = nil) {
         self.type = type
         self.animation = animation
-        self.subscription = subscription
         super.init(bundle: bundle, hpBarId: hpBarId, hp: type.maxHP, maxHP: type.maxHP)
     }
     var type: CreepType
