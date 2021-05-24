@@ -8,6 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		7C131183264FDD910056ABE8 /* StripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C131182264FDD910056ABE8 /* StripViewCell.swift */; };
+		7C1311FA265C4E860056ABE8 /* SoundsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1311F9265C4E860056ABE8 /* SoundsHandler.swift */; };
+		7C13122A265C4EFC0056ABE8 /* lvl05_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */; };
+		7C13122B265C4EFC0056ABE8 /* lvl04_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */; };
+		7C13122C265C4EFC0056ABE8 /* lvl04_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */; };
+		7C13122D265C4EFC0056ABE8 /* lvl01_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */; };
+		7C13122E265C4EFC0056ABE8 /* lvl02_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */; };
+		7C13122F265C4EFC0056ABE8 /* lvl03_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */; };
+		7C131230265C4EFC0056ABE8 /* lvl06_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */; };
+		7C131231265C4EFC0056ABE8 /* lvl06_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */; };
+		7C131232265C4EFC0056ABE8 /* lvl03_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */; };
+		7C131233265C4EFC0056ABE8 /* lvl02_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */; };
+		7C131234265C4EFC0056ABE8 /* lvl01_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */; };
+		7C131235265C4EFC0056ABE8 /* lvl04_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */; };
+		7C131236265C4EFC0056ABE8 /* lvl05_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */; };
+		7C131237265C4EFC0056ABE8 /* lvl02_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */; };
+		7C131238265C4EFC0056ABE8 /* lvl03_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */; };
+		7C131239265C4EFC0056ABE8 /* lvl05_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */; };
+		7C13123A265C4EFC0056ABE8 /* lvl05_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */; };
+		7C13123B265C4EFC0056ABE8 /* lvl06_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */; };
+		7C13123C265C4EFC0056ABE8 /* lvl05_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */; };
+		7C13123D265C4EFC0056ABE8 /* lvl04_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */; };
+		7C13123E265C4EFC0056ABE8 /* lvl04_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */; };
+		7C13123F265C4EFC0056ABE8 /* lvl01_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */; };
+		7C131240265C4EFC0056ABE8 /* lvl01_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */; };
+		7C131241265C4EFC0056ABE8 /* lvl04_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */; };
+		7C131242265C4EFC0056ABE8 /* lvl04_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */; };
+		7C131243265C4EFC0056ABE8 /* lvl05_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */; };
+		7C131244265C4EFC0056ABE8 /* lvl06_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */; };
+		7C131245265C4EFC0056ABE8 /* lvl06_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */; };
+		7C131246265C4EFC0056ABE8 /* lvl06_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */; };
+		7C131247265C4EFC0056ABE8 /* lvl03_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */; };
+		7C131248265C4EFC0056ABE8 /* lvl02_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */; };
+		7C131249265C4EFC0056ABE8 /* lvl06_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */; };
+		7C13124A265C4EFC0056ABE8 /* lvl05_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */; };
+		7C13124B265C4EFC0056ABE8 /* lvl06_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */; };
+		7C13124C265C4EFC0056ABE8 /* lvl01_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */; };
+		7C13124D265C4EFC0056ABE8 /* lvl04_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */; };
+		7C13124E265C4EFC0056ABE8 /* lvl04_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */; };
+		7C13124F265C4EFC0056ABE8 /* lvl06_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */; };
+		7C131250265C4EFC0056ABE8 /* lvl05_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */; };
+		7C131251265C4EFC0056ABE8 /* lvl05_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */; };
+		7C131252265C4EFC0056ABE8 /* lvl05_higherpath005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */; };
+		7C131253265C4EFC0056ABE8 /* lvl06_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */; };
+		7C131254265C4EFC0056ABE8 /* lvl02_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */; };
+		7C131255265C4EFC0056ABE8 /* lvl03_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */; };
+		7C131256265C4EFC0056ABE8 /* lvl05_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */; };
+		7C131257265C4EFC0056ABE8 /* lvl04_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */; };
+		7C13125A265C4F010056ABE8 /* lvl00_neutral002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */; };
+		7C131262265C4F870056ABE8 /* creep_spawn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125C265C4F870056ABE8 /* creep_spawn.wav */; };
+		7C131263265C4F870056ABE8 /* tower_building.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125D265C4F870056ABE8 /* tower_building.wav */; };
+		7C131264265C4F870056ABE8 /* bomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125E265C4F870056ABE8 /* bomb.wav */; };
+		7C131265265C4F870056ABE8 /* missile.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125F265C4F870056ABE8 /* missile.wav */; };
+		7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131260265C4F870056ABE8 /* creep_finish.wav */; };
+		7C131267265C4F870056ABE8 /* sword.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131261265C4F870056ABE8 /* sword.wav */; };
 		7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */; };
 		7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */; };
 		7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */; };
@@ -77,6 +131,60 @@
 
 /* Begin PBXFileReference section */
 		7C131182264FDD910056ABE8 /* StripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripViewCell.swift; sourceTree = "<group>"; };
+		7C1311F9265C4E860056ABE8 /* SoundsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundsHandler.swift; sourceTree = "<group>"; };
+		7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground003.usdz; sourceTree = "<group>"; };
+		7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath004.usdz; sourceTree = "<group>"; };
+		7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground002.usdz; sourceTree = "<group>"; };
+		7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground005.usdz; sourceTree = "<group>"; };
+		7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground003.usdz; sourceTree = "<group>"; };
+		7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground002.usdz; sourceTree = "<group>"; };
+		7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground005.usdz; sourceTree = "<group>"; };
+		7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground004.usdz; sourceTree = "<group>"; };
+		7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground003.usdz; sourceTree = "<group>"; };
+		7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground002.usdz; sourceTree = "<group>"; };
+		7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground004.usdz; sourceTree = "<group>"; };
+		7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground003.usdz; sourceTree = "<group>"; };
+		7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground002.usdz; sourceTree = "<group>"; };
+		7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground005.usdz; sourceTree = "<group>"; };
+		7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground004.usdz; sourceTree = "<group>"; };
+		7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath001.usdz; sourceTree = "<group>"; };
+		7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherbase001.usdz; sourceTree = "<group>"; };
+		7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground003.usdz; sourceTree = "<group>"; };
+		7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground005.usdz; sourceTree = "<group>"; };
+		7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath002.usdz; sourceTree = "<group>"; };
+		7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground004.usdz; sourceTree = "<group>"; };
+		7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground003.usdz; sourceTree = "<group>"; };
+		7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground002.usdz; sourceTree = "<group>"; };
+		7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground005.usdz; sourceTree = "<group>"; };
+		7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath003.usdz; sourceTree = "<group>"; };
+		7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground004.usdz; sourceTree = "<group>"; };
+		7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground002.usdz; sourceTree = "<group>"; };
+		7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherbase001.usdz; sourceTree = "<group>"; };
+		7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath001.usdz; sourceTree = "<group>"; };
+		7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground005.usdz; sourceTree = "<group>"; };
+		7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground004.usdz; sourceTree = "<group>"; };
+		7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground001.usdz; sourceTree = "<group>"; };
+		7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath003.usdz; sourceTree = "<group>"; };
+		7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath002.usdz; sourceTree = "<group>"; };
+		7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground001.usdz; sourceTree = "<group>"; };
+		7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath001.usdz; sourceTree = "<group>"; };
+		7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherbase001.usdz; sourceTree = "<group>"; };
+		7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath003.usdz; sourceTree = "<group>"; };
+		7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath002.usdz; sourceTree = "<group>"; };
+		7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground001.usdz; sourceTree = "<group>"; };
+		7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath005.usdz; sourceTree = "<group>"; };
+		7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath004.usdz; sourceTree = "<group>"; };
+		7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground001.usdz; sourceTree = "<group>"; };
+		7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground001.usdz; sourceTree = "<group>"; };
+		7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath004.usdz; sourceTree = "<group>"; };
+		7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground001.usdz; sourceTree = "<group>"; };
+		7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl00_neutral002.usdz; sourceTree = "<group>"; };
+		7C13125C265C4F870056ABE8 /* creep_spawn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_spawn.wav; sourceTree = "<group>"; };
+		7C13125D265C4F870056ABE8 /* tower_building.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tower_building.wav; sourceTree = "<group>"; };
+		7C13125E265C4F870056ABE8 /* bomb.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bomb.wav; sourceTree = "<group>"; };
+		7C13125F265C4F870056ABE8 /* missile.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile.wav; sourceTree = "<group>"; };
+		7C131260265C4F870056ABE8 /* creep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_finish.wav; sourceTree = "<group>"; };
+		7C131261265C4F870056ABE8 /* sword.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sword.wav; sourceTree = "<group>"; };
 		7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TowerEnciclopediaViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -165,6 +273,80 @@
 			path = Strip;
 			sourceTree = "<group>";
 		};
+		7C1311FB265C4EFB0056ABE8 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */,
+				7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */,
+				7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */,
+				7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */,
+				7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */,
+				7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */,
+				7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */,
+				7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */,
+				7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */,
+				7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */,
+				7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */,
+				7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */,
+				7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */,
+				7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */,
+				7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */,
+				7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */,
+				7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */,
+				7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */,
+				7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */,
+				7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */,
+				7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */,
+				7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */,
+				7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */,
+				7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */,
+				7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */,
+				7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */,
+				7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */,
+				7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */,
+				7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */,
+				7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */,
+				7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */,
+				7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */,
+				7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */,
+				7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */,
+				7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */,
+				7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */,
+				7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */,
+				7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */,
+				7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */,
+				7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */,
+				7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */,
+				7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */,
+				7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */,
+				7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */,
+				7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */,
+				7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		7C131258265C4F010056ABE8 /* Neutral */ = {
+			isa = PBXGroup;
+			children = (
+				7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */,
+			);
+			path = Neutral;
+			sourceTree = "<group>";
+		};
+		7C13125B265C4F870056ABE8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7C13125C265C4F870056ABE8 /* creep_spawn.wav */,
+				7C13125D265C4F870056ABE8 /* tower_building.wav */,
+				7C13125E265C4F870056ABE8 /* bomb.wav */,
+				7C13125F265C4F870056ABE8 /* missile.wav */,
+				7C131260265C4F870056ABE8 /* creep_finish.wav */,
+				7C131261265C4F870056ABE8 /* sword.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		7C8B4B4F2646C1650073BCAE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +359,8 @@
 		7C8B4B562646D3E20073BCAE /* 3DModels */ = {
 			isa = PBXGroup;
 			children = (
+				7C131258265C4F010056ABE8 /* Neutral */,
+				7C1311FB265C4EFB0056ABE8 /* Levels */,
 				7C8B4B6C2646D4050073BCAE /* Creeps */,
 				7C8B4B572646D4030073BCAE /* Map */,
 				7C8B4B712646D4050073BCAE /* Paths */,
@@ -265,6 +449,7 @@
 		7C8D5C01263D1F7C0016D837 /* ARTowerDefense */ = {
 			isa = PBXGroup;
 			children = (
+				7C13125B265C4F870056ABE8 /* Sounds */,
 				7C8B4B562646D3E20073BCAE /* 3DModels */,
 				7C8D5C16263D461B0016D837 /* Model */,
 				7C8D5C27263DA8EB0016D837 /* Utils */,
@@ -323,6 +508,7 @@
 				7C8D5C2B263DA9020016D837 /* Map.swift */,
 				7C8D5C28263DA9020016D837 /* Utils.swift */,
 				7C8B4B542646CB3E0073BCAE /* UserDefaults+Enum.swift */,
+				7C1311F9265C4E860056ABE8 /* SoundsHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -490,36 +676,89 @@
 				7C8B4B8A2647163A0073BCAE /* here.usdz in Resources */,
 				7C8B4B532646C17D0073BCAE /* SettingsViewCell.xib in Resources */,
 				7C8B4B902647163F0073BCAE /* small.usdz in Resources */,
+				7C131251265C4EFC0056ABE8 /* lvl05_ground001.usdz in Resources */,
 				7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */,
 				7C8B4B7E2647161A0073BCAE /* launcher_lvl1.usdz in Resources */,
+				7C131267265C4F870056ABE8 /* sword.wav in Resources */,
+				7C13123A265C4EFC0056ABE8 /* lvl05_higherbase001.usdz in Resources */,
 				7C8B4B8E2647163F0073BCAE /* heavy.usdz in Resources */,
+				7C131257265C4EFC0056ABE8 /* lvl04_ground001.usdz in Resources */,
+				7C131235265C4EFC0056ABE8 /* lvl04_ground003.usdz in Resources */,
+				7C131238265C4EFC0056ABE8 /* lvl03_ground004.usdz in Resources */,
+				7C131253265C4EFC0056ABE8 /* lvl06_higherpath004.usdz in Resources */,
 				7C8D5C5D26462F720016D837 /* CreepEnciclopediaViewCell.xib in Resources */,
+				7C131249265C4EFC0056ABE8 /* lvl06_ground001.usdz in Resources */,
 				7C8B4B7A2647160F0073BCAE /* turret_lvl1.usdz in Resources */,
 				7C8B4B8F2647163F0073BCAE /* flying.usdz in Resources */,
+				7C131231265C4EFC0056ABE8 /* lvl06_ground004.usdz in Resources */,
+				7C13124A265C4EFC0056ABE8 /* lvl05_higherpath003.usdz in Resources */,
 				7C8B4B822647162F0073BCAE /* bullet.usdz in Resources */,
 				7C8B4B8B2647163A0073BCAE /* spawn_port.usdz in Resources */,
+				7C131255265C4EFC0056ABE8 /* lvl03_ground001.usdz in Resources */,
+				7C131250265C4EFC0056ABE8 /* lvl05_higherpath002.usdz in Resources */,
+				7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */,
 				7C8B4B87264716340073BCAE /* path_upwards.usdz in Resources */,
 				7C8B4B842647162F0073BCAE /* flying_bomb.usdz in Resources */,
+				7C131252265C4EFC0056ABE8 /* lvl05_higherpath005.usdz in Resources */,
+				7C13124D265C4EFC0056ABE8 /* lvl04_higherpath001.usdz in Resources */,
+				7C131239265C4EFC0056ABE8 /* lvl05_higherpath001.usdz in Resources */,
 				7C8B4B7C264716140073BCAE /* barracks_lvl1.usdz in Resources */,
+				7C13122C265C4EFC0056ABE8 /* lvl04_ground002.usdz in Resources */,
+				7C131263265C4F870056ABE8 /* tower_building.wav in Resources */,
+				7C131243265C4EFC0056ABE8 /* lvl05_ground004.usdz in Resources */,
 				7C8B4B8D2647163A0073BCAE /* hud_placing.usdz in Resources */,
+				7C13122F265C4EFC0056ABE8 /* lvl03_ground002.usdz in Resources */,
 				7C8B4B832647162F0073BCAE /* selectionRing.usdz in Resources */,
+				7C131233265C4EFC0056ABE8 /* lvl02_ground002.usdz in Resources */,
+				7C131245265C4EFC0056ABE8 /* lvl06_higherbase001.usdz in Resources */,
 				7C8B4B792647160B0073BCAE /* turret_lvl3.usdz in Resources */,
 				7C8B4B892647163A0073BCAE /* goal.usdz in Resources */,
 				7C8B4B8C2647163A0073BCAE /* tower_placing.usdz in Resources */,
 				7C8D5C2E263DA9020016D837 /* config.json in Resources */,
+				7C13123D265C4EFC0056ABE8 /* lvl04_higherpath002.usdz in Resources */,
+				7C131236265C4EFC0056ABE8 /* lvl05_ground002.usdz in Resources */,
+				7C131237265C4EFC0056ABE8 /* lvl02_ground005.usdz in Resources */,
+				7C13122A265C4EFC0056ABE8 /* lvl05_ground003.usdz in Resources */,
+				7C13124F265C4EFC0056ABE8 /* lvl06_higherpath003.usdz in Resources */,
+				7C13125A265C4F010056ABE8 /* lvl00_neutral002.usdz in Resources */,
+				7C131248265C4EFC0056ABE8 /* lvl02_ground004.usdz in Resources */,
+				7C13124C265C4EFC0056ABE8 /* lvl01_ground001.usdz in Resources */,
+				7C131262265C4F870056ABE8 /* creep_spawn.wav in Resources */,
 				7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */,
+				7C13123E265C4EFC0056ABE8 /* lvl04_ground004.usdz in Resources */,
+				7C13122E265C4EFC0056ABE8 /* lvl02_ground003.usdz in Resources */,
+				7C131246265C4EFC0056ABE8 /* lvl06_higherpath001.usdz in Resources */,
 				7C8B4B912647163F0073BCAE /* regular.usdz in Resources */,
+				7C131234265C4EFC0056ABE8 /* lvl01_ground004.usdz in Resources */,
 				7C8D5C0C263D1F7F0016D837 /* Assets.xcassets in Resources */,
 				7C8B4B7B264716110073BCAE /* turret_lvl2.usdz in Resources */,
 				7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */,
 				7C8B4B86264716340073BCAE /* path.usdz in Resources */,
 				7C8B4B812647161A0073BCAE /* launcher_lvl2.usdz in Resources */,
+				7C13124E265C4EFC0056ABE8 /* lvl04_higherbase001.usdz in Resources */,
+				7C13123B265C4EFC0056ABE8 /* lvl06_ground003.usdz in Resources */,
+				7C13122B265C4EFC0056ABE8 /* lvl04_higherpath004.usdz in Resources */,
+				7C13123C265C4EFC0056ABE8 /* lvl05_ground005.usdz in Resources */,
 				7C8D5C0A263D1F7C0016D837 /* Main.storyboard in Resources */,
+				7C131254265C4EFC0056ABE8 /* lvl02_ground001.usdz in Resources */,
 				7C8B4B852647162F0073BCAE /* circle_effect.usdz in Resources */,
+				7C131256265C4EFC0056ABE8 /* lvl05_higherpath004.usdz in Resources */,
+				7C13123F265C4EFC0056ABE8 /* lvl01_ground003.usdz in Resources */,
 				7C8B4B802647161A0073BCAE /* launcher_lvl3.usdz in Resources */,
+				7C131232265C4EFC0056ABE8 /* lvl03_ground003.usdz in Resources */,
+				7C131264265C4F870056ABE8 /* bomb.wav in Resources */,
+				7C13124B265C4EFC0056ABE8 /* lvl06_higherpath002.usdz in Resources */,
+				7C131244265C4EFC0056ABE8 /* lvl06_ground002.usdz in Resources */,
+				7C131241265C4EFC0056ABE8 /* lvl04_ground005.usdz in Resources */,
+				7C131242265C4EFC0056ABE8 /* lvl04_higherpath003.usdz in Resources */,
+				7C13122D265C4EFC0056ABE8 /* lvl01_ground005.usdz in Resources */,
 				7C8B4B7F2647161A0073BCAE /* barracks_lvl2.usdz in Resources */,
+				7C131240265C4EFC0056ABE8 /* lvl01_ground002.usdz in Resources */,
+				7C131247265C4EFC0056ABE8 /* lvl03_ground005.usdz in Resources */,
 				7C8B4B88264716340073BCAE /* path_downwards.usdz in Resources */,
+				7C131230265C4EFC0056ABE8 /* lvl06_ground005.usdz in Resources */,
 				7C8B4B7D2647161A0073BCAE /* barracks_lvl3.usdz in Resources */,
+				7C131265265C4F870056ABE8 /* missile.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +772,7 @@
 				7C8D5C1E263DA0080016D837 /* MenuViewModel.swift in Sources */,
 				7C8D5C2D263DA9020016D837 /* Bundle+Enums.swift in Sources */,
 				7C8D5C33263DA9310016D837 /* PlacingBundle.swift in Sources */,
+				7C1311FA265C4E860056ABE8 /* SoundsHandler.swift in Sources */,
 				7C8D5C532640AFC30016D837 /* GameViewModel+Enums.swift in Sources */,
 				7C8D5C37263DA93C0016D837 /* UnitBundle.swift in Sources */,
 				7C8D5C3F263DD1080016D837 /* GameViewController.swift in Sources */,
