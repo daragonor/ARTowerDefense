@@ -27,11 +27,14 @@ class GameViewModel {
 
 //    var glyphs: [UInt64 : ModelEntity] = .init()
     var spawnPlaces: [SpawnBundle] = .init()
+    var ziplineTransportPlaces: [SpawnBundle] = .init()
+
     var creeps: [UInt64 : CreepBundle] = .init()
     var placings: [UInt64 : PlacingBundle] = .init()
     var towers: [UInt64 : TowerBundle] = .init()
     var troops: [UInt64 : TroopBundle] = .init()
     var ammo: [UInt64 : AmmoBundle] = .init()
+    var pendingDeliveryCreeps: [(Float, CreepType)] = .init()
     var networkStatus: Bool = false
     private var cancellables: Set<AnyCancellable> = .init()
     private var arView: ARView!
@@ -96,6 +99,8 @@ extension GameViewModel: GameViewModelProtocol {
         towers = [:]
         troops = [:]
         ammo = [:]
+        ziplineTransportPlaces = []
+        pendingDeliveryCreeps = []
         viewState = .returnToMenu(connected: networkStatus)
     }
     
@@ -248,6 +253,8 @@ private extension GameViewModel {
         }
     }
     
+    
+    
     func deployUnit(_ creep: CreepBundle, to index: Int = 0, on path: [OrientedCoordinate], baseHeight: Float? = nil, setScale: Float? = nil) {
         var unitTransform = creep.model.transform
         let move = path[index]
@@ -273,7 +280,34 @@ private extension GameViewModel {
                     self.viewState = .updateHP(self.playerHp)
                     self.checkMissionCompleted()
                 } else if move.mapLegend == .zipLineOut {
+                    self.pendingDeliveryCreeps.insert((creep.hp, creep.type), at: .zero)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                        creep.model.removeFromParent()
+                        guard let self = self else { return }
+                        guard let (creepHP, creepType) = self.pendingDeliveryCreeps.popLast(), let mission = self.currentMission else { return }
+                        let spawn = self.ziplineTransportPlaces[Int.random(in: 0...1)]
+                        let missionConfig = self.config.missions[mission]
 
+                        let paths = missionConfig.maps[spawn.map].creepPathsCoordinates(at: spawn.position, diameter: self.config.initialValues.gridDiameter)
+
+                        let creepModelBundle: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
+                        creepModelBundle.model.position.y += 0.03
+                        let bounds = creepModelBundle.entity.visualBounds(relativeTo: creepModelBundle.model)
+                        creepModelBundle.model.collision = CollisionComponent(shapes: [ShapeResource.generateBox(size: SIMD3(repeating: 0.0015))], mode: .trigger, filter: CollisionFilter(group: Filter.creeps.group, mask: Filter.towers.group))
+                        spawn.model.anchor?.addChild(creepModelBundle.model)
+
+                        let hpPercentage = creepHP / creepType.maxHP
+                        let hpBar = self.templates[Lifepoints.status(hp: hpPercentage).key]!.clone(recursive: true)
+                        hpBar.scale = [hpPercentage, 1.0, 1.0]
+                        creep.model.addChild(hpBar)
+                        hpBar.position.y = (bounds.extents.y / 2) + 0.003
+                        let creep = CreepBundle(bundle: creepModelBundle, hpBarId: hpBar.id, type: creepType, animation: nil)
+                        self.creeps[creep.model.id] = creep
+                        creep.entity.playAnimation(creep.entity.availableAnimations[0].repeat())
+                        SoundsHandler.shared.playSound(AudioSource.creep_spawn)
+                        self.deployUnit(creep, on: paths[self.waveCount % paths.count], setScale: 10)
+                    }
+                    
                 } else {
                     DispatchQueue.main.async {
                         self.deployUnit(creep, to: index + 1, on: path, baseHeight: height)
@@ -379,8 +413,11 @@ private extension GameViewModel {
                             anchor.addChild(ground.model)
                     }
                     break
-                case .zipLineIn, .zipLineOut:
-                    break
+                case .zipLineIn:
+                    let station = templates[ModelType.spawnPort.key]!.embeddedModel(at: [x, 0.001, z])
+                    ziplineTransportPlaces.append(SpawnBundle(model: station.model, position: (row, column), map: usedMaps))
+                    anchor.addChild(station.model)
+                case .zipLineOut: break
                 case .goal:
                     let portal = templates[ModelType.goal.key]!.embeddedModel(at: [x, 0.03, z])
                     anchor.addChild(portal.model)
