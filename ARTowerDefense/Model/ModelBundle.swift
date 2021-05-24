@@ -19,6 +19,7 @@ class ModelBundle {
     internal init(model: ModelEntity, entity: Entity) {
         self.model = model
         self.entity = entity
+        self.model.synchronization?.ownershipTransferMode = .autoAccept
     }
     var entity: Entity
     var model: ModelEntity

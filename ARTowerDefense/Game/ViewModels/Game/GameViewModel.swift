@@ -116,6 +116,47 @@ extension GameViewModel: GameViewModelProtocol {
 }
 
 private extension GameViewModel {
+    
+    func loadTemplatesIfNeeded(_ connected: Bool) {
+        guard templates.isEmpty else {
+            viewState = .loadAnchorConfiguration(connected)
+            return
+        }
+        var loadedModels: Int = .zero
+        viewState = .showLoadingAssets
+        var modelNames = ModelType.allCases.map { $0.key }
+        modelNames += CreepType.allCases.map { $0.key }
+        modelNames += LevelType.allCases.map { $0.key }
+        modelNames += NeutralType.allCases.map { $0.key }
+        modelNames += TowerType.allCases.map { type in TowerLevel.allCases.map { lvl in type.key(lvl) } }.joined()
+        
+        for name in modelNames {
+            ModelEntity.loadAsync(named: name).sink(
+                receiveCompletion: { _ in print ("completion: \(name)") },
+                receiveValue: { [weak self] entity in
+                    guard let self = self else { return }
+                    loadedModels += 1
+                    if loadedModels == modelNames.count {
+                        for lifepoint in Lifepoints.allCases {
+                            self.templates[lifepoint.key] = ModelEntity(mesh: .generateBox(size: SIMD3(x: 0.003, y: 0.0005, z: 0.0005), cornerRadius: 0.0002), materials: [SimpleMaterial(color: lifepoint.color, isMetallic: false)])
+                        }
+                        self.viewState = .hideLoadingAssets
+                        self.viewState = .loadAnchorConfiguration(connected)
+
+                    }
+                    let factor =
+                        ModelType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
+                        CreepType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
+                        LevelType(rawValue: name)?.scalingFactor ??
+                        NeutralType(rawValue: name)?.scalingFactor ??
+                        TowerType.scalingFactor
+                    entity.setScale(SIMD3(repeating: factor), relativeTo: nil)
+                    self.templates[name] = entity
+                    
+                }).store(in: &cancellables)
+        }
+    }
+    
     func getStripe(for state: StripState) -> [CellViewModelProtocol] {
         return state.strip.map { option in
             var onTap: () -> Void = {}
@@ -169,7 +210,7 @@ private extension GameViewModel {
                 if graceTimer == 0 {
                     self.sendWaves(mission: mission, wave: self.waveCount)
                     self.waveCount += 1
-                    self.viewState = .updateWaves(value: "\(self.waveCount + 1)/\(self.config.missions[mission].waves.count)")
+                    self.viewState = .updateWaves(value: "\(self.waveCount)/\(self.config.missions[mission].waves.count)")
                 }
                 graceTimer -= 1
             } else {
@@ -188,55 +229,58 @@ private extension GameViewModel {
             let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 guard count < missionConfig.waves[wave].count else { timer.invalidate() ; return }
                 let creepType = CreepType.allCases[missionConfig.waves[wave][count]]
-                let creep: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
-                creep.model.position.y += 0.03
-                let bounds = creep.entity.visualBounds(relativeTo: creep.model)
-                creep.model.collision = CollisionComponent(shapes: [ShapeResource.generateBox(size: SIMD3(repeating: 0.0015))], mode: .trigger, filter: CollisionFilter(group: Filter.creeps.group, mask: Filter.towers.group))
-                spawn.model.anchor?.addChild(creep.model)
+                let creepModelBundle: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
+                creepModelBundle.model.position.y += 0.03
+                let bounds = creepModelBundle.entity.visualBounds(relativeTo: creepModelBundle.model)
+                creepModelBundle.model.collision = CollisionComponent(shapes: [ShapeResource.generateBox(size: SIMD3(repeating: 0.0015))], mode: .trigger, filter: CollisionFilter(group: Filter.creeps.group, mask: Filter.towers.group))
+                spawn.model.anchor?.addChild(creepModelBundle.model)
                 let creepHPbar = self.templates[Lifepoints.full.key]!.clone(recursive: true)
-                creep.model.addChild(creepHPbar)
+                creepModelBundle.model.addChild(creepHPbar)
                 creepHPbar.position.y = (bounds.extents.y / 2) + 0.003
-                self.creeps[creep.model.id] = CreepBundle(bundle: creep, hpBarId: creepHPbar.id, type: creepType, animation: nil, subscription: nil)
+                let creep = CreepBundle(bundle: creepModelBundle, hpBarId: creepHPbar.id, type: creepType, animation: nil)
+                self.creeps[creep.model.id] = creep
                 creep.entity.playAnimation(creep.entity.availableAnimations[0].repeat())
                 count += 1
                 SoundsHandler.shared.playSound(AudioSource.creep_spawn)
-                self.deployUnit(creep.model, type: creepType,speed: creepType.speed, on: paths[self.waveCount % paths.count], setScale: 10)
+                self.deployUnit(creep, on: paths[self.waveCount % paths.count], setScale: 10)
             }
             timer.fire()
         }
     }
     
-    func deployUnit(_ creep: ModelEntity, type: CreepType, speed: Float, to index: Int = 0, on path: [OrientedCoordinate], baseHeight: Float? = nil, setScale: Float? = nil) {
-        var unitTransform = creep.transform
+    func deployUnit(_ creep: CreepBundle, to index: Int = 0, on path: [OrientedCoordinate], baseHeight: Float? = nil, setScale: Float? = nil) {
+        var unitTransform = creep.model.transform
         let move = path[index]
         ///Set new move
         let height = baseHeight ?? unitTransform.translation.y
         unitTransform.translation = move.coordinate
         unitTransform.translation.y += height
-        unitTransform.rotation = simd_quatf(angle: move.angle + type.angleOffset, axis: [0, 1, 0])
+        unitTransform.rotation = simd_quatf(angle: move.angle + creep.type.angleOffset, axis: [0, 1, 0])
         if let scale = setScale { unitTransform.scale = SIMD3(repeating: scale) }
         ///Start moving
-        let animation = creep.move(to: unitTransform, relativeTo: creep.anchor, duration: TimeInterval(speed), timingFunction: .linear)
-        creeps[creep.id]?.animation = animation
+        let animation = creep.model.move(to: unitTransform, relativeTo: creep.model.anchor, duration: TimeInterval(creep.type.speed), timingFunction: .linear)
+        creeps[creep.model.id]?.animation = animation
         let subscription = arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
             .filter(animation.isPlaybackController)
             .sink(receiveValue: { event in
                 if move.mapLegend == .goal {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        creep.removeFromParent()
+                        creep.model.removeFromParent()
                     }
                     SoundsHandler.shared.playSound(AudioSource.creep_finish)
-                    self.creeps.removeValue(forKey: creep.id)
+                    self.creeps.removeValue(forKey: creep.model.id)
                     self.playerHp -= 1
                     self.viewState = .updateHP(self.playerHp)
                     self.checkMissionCompleted()
                 } else if move.mapLegend == .zipLineOut {
-                    
+
                 } else {
-                    self.deployUnit(creep, type: type, speed: speed, to: index + 1, on: path, baseHeight: height)
+                    DispatchQueue.main.async {
+                        self.deployUnit(creep, to: index + 1, on: path, baseHeight: height)
+                    }
                 }
             })
-        creeps[creep.id]?.subscription = subscription
+        creep.subscription = subscription
     }
     
     func upgradeTower() {
@@ -261,46 +305,6 @@ private extension GameViewModel {
         self.viewState = .updateCoins(config.initialValues.coins)
         self.viewState = .updateHP(config.initialValues.playerHp)
         self.viewState = .updateWaves(value: "0/\(config.missions[mission].waves.count)")
-    }
-    
-    func loadTemplatesIfNeeded(_ connected: Bool) {
-        guard templates.isEmpty else {
-            viewState = .loadAnchorConfiguration(connected)
-            return
-        }
-        var loadedModels: Int = .zero
-        viewState = .showLoadingAssets
-        var modelNames = ModelType.allCases.map { $0.key }
-        modelNames += CreepType.allCases.map { $0.key }
-        modelNames += LevelType.allCases.map { $0.key }
-        modelNames += NeutralType.allCases.map { $0.key }
-        modelNames += TowerType.allCases.map { type in TowerLevel.allCases.map { lvl in type.key(lvl) } }.joined()
-        
-        for name in modelNames {
-            ModelEntity.loadAsync(named: name).sink(
-                receiveCompletion: { _ in print ("completion: \(name)") },
-                receiveValue: { [weak self] entity in
-                    guard let self = self else { return }
-                    loadedModels += 1
-                    if loadedModels == modelNames.count {
-                        for lifepoint in Lifepoints.allCases {
-                            self.templates[lifepoint.key] = ModelEntity(mesh: .generateBox(size: SIMD3(x: 0.003, y: 0.0005, z: 0.0005), cornerRadius: 0.0002), materials: [SimpleMaterial(color: lifepoint.color, isMetallic: false)])
-                        }
-                        self.viewState = .hideLoadingAssets
-                        self.viewState = .loadAnchorConfiguration(connected)
-
-                    }
-                    let factor =
-                        ModelType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
-                        CreepType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
-                        LevelType(rawValue: name)?.scalingFactor ??
-                        NeutralType(rawValue: name)?.scalingFactor ??
-                        TowerType.scalingFactor
-                    entity.setScale(SIMD3(repeating: factor), relativeTo: nil)
-                    self.templates[name] = entity
-                    
-                }).store(in: &cancellables)
-        }
     }
     
     func insertMap(anchor: AnchorEntity, map: MapModel) {
@@ -641,7 +645,9 @@ extension GameViewModel {
         let subscription = arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
             .filter(animation.isPlaybackController)
             .sink(receiveValue: { [weak self] _ in
-                self?.deployBomb(speed: speed, iterations: iterations, bomb: bomb, tower: tower, creep: creep, topHeight: topHeight, counter: counter + 1)
+                DispatchQueue.main.async {
+                    self?.deployBomb(speed: speed, iterations: iterations, bomb: bomb, tower: tower, creep: creep, topHeight: topHeight, counter: counter + 1)
+                }
             })
         bomb.subscriptions.append(subscription)
     }

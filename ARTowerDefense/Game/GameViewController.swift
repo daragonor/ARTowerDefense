@@ -121,9 +121,10 @@ class GameViewController: UIViewController {
                 }
             case .enableFocusView:
                 self.canRayCast = true
-//                if self.focusEntity == nil {
+                if self.focusEntity == nil {
 //                    self.focusEntity = FocusEntity(on: self.arView, focus: .classic)
-//                }
+//                    self.focusEntity?.synchronization = nil
+                }
             case .disableFocusView:
                 self.canRayCast = false
 //                self.focusEntity?.destroy()
@@ -146,6 +147,7 @@ class GameViewController: UIViewController {
                 self.hpLabel.text = "\(lifepoints)"
             case .updateWaves(let value):
                 self.waveLabel.text = value
+            case .startMission: break
             case .showMissionCompleted:
                 let alert = UIAlertController(title: nil, message: "Mission Completed", preferredStyle: .alert)
                 self.present(alert, animated: true) {
@@ -172,12 +174,16 @@ class GameViewController: UIViewController {
         arConfig = ARWorldTrackingConfiguration()
         arConfig.planeDetection = [.horizontal, .vertical]
         arConfig.environmentTexturing = .automatic
+        arView.renderOptions.insert(.disableMotionBlur)
+
+//        arView.debugOptions.insert(.showPhysics)
 //        if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
 //            arConfig.frameSemantics.insert(.personSegmentationWithDepth)
 //        }
         arConfig.isCollaborationEnabled = connected
-        
+        if connected { setupMultipeerHelper() }
         arView.session.run(arConfig)
+        
     }
     
     @objc
