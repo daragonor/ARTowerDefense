@@ -87,6 +87,15 @@ extension StringProtocol {
 }
 
 extension float4x4 {
+    var translation: SIMD3<Float> {
+      get {
+        let translation = columns.3
+        return SIMD3<Float>(translation.x, translation.y, translation.z)
+      }
+      set(newValue) {
+        columns.3 = SIMD4<Float>(newValue.x, newValue.y, newValue.z, columns.3.w)
+      }
+    }
     /// Returns the translation components of the matrix
     func toTranslation() -> SIMD3<Float> {
       return [self[3,0], self[3,1], self[3,2]]
@@ -95,6 +104,9 @@ extension float4x4 {
     /// rotation component of the matrix
     func toQuaternion() -> simd_quatf {
         return simd_quatf(self)
+    }
+    var orientation: simd_quatf {
+      return simd_quaternion(self)
     }
 }
 

@@ -669,7 +669,7 @@ extension GameViewModel {
             bullet.rotate(to: creep)
             let animation = bullet.model.move(to: bulletTransform, relativeTo: bullet.model.anchor, duration: 0.1, timingFunction: .linear)
             let subscription = self.arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
-                .filter { $0.playbackController == animation }
+                .filter(animation.isPlaybackController)
                 .sink( receiveValue: { [weak self] event in
                     guard let self = self else { return }
                     self.damageCreep(creepModel: creep.model, towerId: tower.model.id, attack: tower.type.attack(lvl: tower.lvl), audioType: "bullet")

@@ -62,6 +62,7 @@
 		7C131265265C4F870056ABE8 /* missile.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125F265C4F870056ABE8 /* missile.wav */; };
 		7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131260265C4F870056ABE8 /* creep_finish.wav */; };
 		7C131267265C4F870056ABE8 /* sword.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131261265C4F870056ABE8 /* sword.wav */; };
+		7C13126B265C52D40056ABE8 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13126A265C52D40056ABE8 /* FocusView.swift */; };
 		7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */; };
 		7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */; };
 		7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */; };
@@ -185,6 +186,7 @@
 		7C13125F265C4F870056ABE8 /* missile.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile.wav; sourceTree = "<group>"; };
 		7C131260265C4F870056ABE8 /* creep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_finish.wav; sourceTree = "<group>"; };
 		7C131261265C4F870056ABE8 /* sword.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sword.wav; sourceTree = "<group>"; };
+		7C13126A265C52D40056ABE8 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TowerEnciclopediaViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -347,6 +349,24 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		7C131268265C52570056ABE8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */,
+				7C13125B265C4F870056ABE8 /* Sounds */,
+				7C8B4B562646D3E20073BCAE /* 3DModels */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		7C131269265C52AC0056ABE8 /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				7C13126A265C52D40056ABE8 /* FocusView.swift */,
+			);
+			path = Focus;
+			sourceTree = "<group>";
+		};
 		7C8B4B4F2646C1650073BCAE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,21 +469,18 @@
 		7C8D5C01263D1F7C0016D837 /* ARTowerDefense */ = {
 			isa = PBXGroup;
 			children = (
-				7C13125B265C4F870056ABE8 /* Sounds */,
-				7C8B4B562646D3E20073BCAE /* 3DModels */,
-				7C8D5C16263D461B0016D837 /* Model */,
+				7C131268265C52570056ABE8 /* Assets */,
+				7C8D5C16263D461B0016D837 /* Models */,
 				7C8D5C27263DA8EB0016D837 /* Utils */,
 				7C8D5C18263D46340016D837 /* Game */,
 				7C8D5C02263D1F7C0016D837 /* AppDelegate.swift */,
-				7C8D5C08263D1F7C0016D837 /* Main.storyboard */,
-				7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */,
 				7C8D5C0D263D1F7F0016D837 /* LaunchScreen.storyboard */,
 				7C8D5C10263D1F7F0016D837 /* Info.plist */,
 			);
 			path = ARTowerDefense;
 			sourceTree = "<group>";
 		};
-		7C8D5C16263D461B0016D837 /* Model */ = {
+		7C8D5C16263D461B0016D837 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7C8D5C1F263DA8DD0016D837 /* ModelBundle.swift */,
@@ -476,7 +493,7 @@
 				7C8D5C22263DA8DD0016D837 /* UnitBundle.swift */,
 				7C8D5C29263DA9020016D837 /* Bundle+Enums.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7C8D5C18263D46340016D837 /* Game */ = {
@@ -487,6 +504,7 @@
 				7C8D5C3E263DD1080016D837 /* GameViewController.swift */,
 				7C8D5C04263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift */,
 				7C8B4B92264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift */,
+				7C8D5C08263D1F7C0016D837 /* Main.storyboard */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -503,6 +521,7 @@
 		7C8D5C27263DA8EB0016D837 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7C131269265C52AC0056ABE8 /* Focus */,
 				7C8D5C2A263DA9020016D837 /* config.json */,
 				7C8B4B772646E1A20073BCAE /* GameConfig.swift */,
 				7C8D5C2B263DA9020016D837 /* Map.swift */,
@@ -774,6 +793,7 @@
 				7C8D5C33263DA9310016D837 /* PlacingBundle.swift in Sources */,
 				7C1311FA265C4E860056ABE8 /* SoundsHandler.swift in Sources */,
 				7C8D5C532640AFC30016D837 /* GameViewModel+Enums.swift in Sources */,
+				7C13126B265C52D40056ABE8 /* FocusView.swift in Sources */,
 				7C8D5C37263DA93C0016D837 /* UnitBundle.swift in Sources */,
 				7C8D5C3F263DD1080016D837 /* GameViewController.swift in Sources */,
 				7C8D5C3A263DB8330016D837 /* MenuViewModelProtocol.swift in Sources */,

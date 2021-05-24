@@ -10,7 +10,6 @@ import ARKit
 import RealityKit
 import Combine
 import MultipeerHelper
-import FocusEntity
 
 class GameViewController: UIViewController {
     @IBOutlet var arView: ARView!
@@ -122,13 +121,12 @@ class GameViewController: UIViewController {
             case .enableFocusView:
                 self.canRayCast = true
                 if self.focusEntity == nil {
-//                    self.focusEntity = FocusEntity(on: self.arView, focus: .classic)
-//                    self.focusEntity?.synchronization = nil
+                    self.focusEntity = FocusEntity(on: self.arView, focus: .classic)
                 }
             case .disableFocusView:
                 self.canRayCast = false
-//                self.focusEntity?.destroy()
-//                self.focusEntity = nil
+                self.focusEntity?.destroy()
+                self.focusEntity = nil
             case .showLoadingAssets:
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }

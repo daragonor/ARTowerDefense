@@ -168,22 +168,44 @@
                 "speed": "Slow",
                 "range": "Wide",
                 "description": "This tower fires in all directions and more than one objective at the time, it can also hit creeps on higher or lower heights"
+            },
+            {
+                "image": "tower-launcher",
+                "type": "Bomb Launcher",
+                "damage": "High",
+                "speed": "Slow",
+                "range": "Wide",
+                "description": "This tower fires in all directions and more than one objective at the time, it can also hit creeps on higher or lower heights"
             }
         ],
         "creeps": [
             {
-                "image": "clockwise-rotation",
+                "image": "monster",
                 "type": "Normal",
                 "speed": "Regular",
                 "resistance": "Regular",
                 "description": "This creep is a well balanced unit"
             },
             {
-                "image": "anticlockwise-rotation",
+                "image": "monster",
                 "type": "Heavy",
                 "speed": "Slow",
                 "resistance": "Tough",
                 "description": "This creep is a heavy mountain, make sure to get rid of them as soon as possible"
+            },
+            {
+                "image": "monster",
+                "type": "Small",
+                "speed": "Fast",
+                "resistance": "Weak",
+                "description": "This creep is a tiny fellow that might scape your defenses and get to the goal easily"
+            },
+            {
+                "image": "monster",
+                "type": "Flying",
+                "speed": "Fast",
+                "resistance": "Weak",
+                "description": "This is the fastest creep. Eventhough it is quite weak, he might already stormed through your defenses without you even noticing it"
             }
         ]
     }
