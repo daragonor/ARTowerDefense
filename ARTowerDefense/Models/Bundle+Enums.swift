@@ -8,12 +8,13 @@
 
 import Foundation
 enum ModelType: String, CaseIterable {
-    case path, pathDownwards, pathUpwards, towerPlacing, here, goal, spawnPort, bullet, flyingBomb
+    case path, pathDownwards, pathUpwards, towerPlacing, here, goal, spawnPort, bullet, flyingBomb, acidFloor
     var key: String {
         return self.rawValue.camelCaseToSnakeCase()
     }
     var scalingFactor: Float {
         switch self {
+        case .acidFloor: return 0.000125
         case .path: return 0.05
         case .towerPlacing: return 0.000125
         case .pathUpwards, .pathDownwards: return 0.0125

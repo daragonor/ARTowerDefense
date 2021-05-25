@@ -63,6 +63,7 @@
 		7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131260265C4F870056ABE8 /* creep_finish.wav */; };
 		7C131267265C4F870056ABE8 /* sword.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131261265C4F870056ABE8 /* sword.wav */; };
 		7C13126B265C52D40056ABE8 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13126A265C52D40056ABE8 /* FocusView.swift */; };
+		7C13126D265C84770056ABE8 /* acid_floor.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13126C265C84770056ABE8 /* acid_floor.usdz */; };
 		7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */; };
 		7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */; };
 		7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */; };
@@ -187,6 +188,7 @@
 		7C131260265C4F870056ABE8 /* creep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_finish.wav; sourceTree = "<group>"; };
 		7C131261265C4F870056ABE8 /* sword.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sword.wav; sourceTree = "<group>"; };
 		7C13126A265C52D40056ABE8 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		7C13126C265C84770056ABE8 /* acid_floor.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = acid_floor.usdz; sourceTree = "<group>"; };
 		7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TowerEnciclopediaViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 		7C8B4B712646D4050073BCAE /* Paths */ = {
 			isa = PBXGroup;
 			children = (
+				7C13126C265C84770056ABE8 /* acid_floor.usdz */,
 				7C8B4B722646D4050073BCAE /* path.usdz */,
 				7C8B4B732646D4050073BCAE /* path_upwards.usdz */,
 				7C8B4B742646D4050073BCAE /* path_downwards.usdz */,
@@ -696,6 +699,7 @@
 				7C8B4B532646C17D0073BCAE /* SettingsViewCell.xib in Resources */,
 				7C8B4B902647163F0073BCAE /* small.usdz in Resources */,
 				7C131251265C4EFC0056ABE8 /* lvl05_ground001.usdz in Resources */,
+				7C13126D265C84770056ABE8 /* acid_floor.usdz in Resources */,
 				7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */,
 				7C8B4B7E2647161A0073BCAE /* launcher_lvl1.usdz in Resources */,
 				7C131267265C4F870056ABE8 /* sword.wav in Resources */,

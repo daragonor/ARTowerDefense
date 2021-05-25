@@ -270,7 +270,8 @@ private extension GameViewModel {
         let subscription = arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
             .filter(animation.isPlaybackController)
             .sink(receiveValue: { event in
-                if move.mapLegend == .goal {
+                switch move.mapLegend {
+                case .goal:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         creep.model.removeFromParent()
                     }
@@ -279,7 +280,7 @@ private extension GameViewModel {
                     self.playerHp -= 1
                     self.viewState = .updateHP(self.playerHp)
                     self.checkMissionCompleted()
-                } else if move.mapLegend == .zipLineOut {
+                case .zipLineOut:
                     self.pendingDeliveryCreeps.insert((creep.hp, creep.type), at: .zero)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         creep.model.removeFromParent()
@@ -307,8 +308,24 @@ private extension GameViewModel {
                         SoundsHandler.shared.playSound(AudioSource.creep_spawn)
                         self.deployUnit(pendingCreep, on: paths[self.waveCount % paths.count], setScale: 10)
                     }
-                    
-                } else {
+                case .hazard:
+                    var count = 0
+                    Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: true) { [weak self] timer in
+                        guard let self = self, count < 3 else { return }
+                        count += 1
+                        self.damageCreep(creepModel: creep.model, attack: 20, audioType: .bomb) { [weak self] in
+                            guard let self = self else { return }
+                            self.coins += creep.type.reward
+                            self.towers.forEach { $0.value.enemiesIds.removeAll(where: { id in id == creep.model.id })}
+                            creep.model.removeFromParent()
+                            self.creeps.removeValue(forKey: creep.model.id)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                self.checkMissionCompleted()
+                            }
+                        }
+                    }
+                    fallthrough
+                default:
                     DispatchQueue.main.async {
                         self.deployUnit(creep, to: index + 1, on: path, baseHeight: height)
                     }
@@ -358,6 +375,9 @@ private extension GameViewModel {
                 //                let floor = neutralFloorTemplate.embeddedModel(at: [x, 0.005, z])
                 //                anchor.addChild(floor.model)
                 switch mapType {
+                case .hazard:
+                    let station = templates[ModelType.acidFloor.key]!.embeddedModel(at: [x, 0.001, z])
+                    anchor.addChild(station.model)
                 case .neutral:
                     switch currentMission {
                         case 0:
@@ -628,20 +648,19 @@ extension GameViewModel {
             switch tower.type {
             case .turret, .launcher: break
             case .barracks:
-                guard let creepModel = event.entityB as? ModelEntity, let creepBundle = self.creeps[creepModel.id] else { return }
+                guard let creepModel = event.entityB as? ModelEntity, let creep = self.creeps[creepModel.id] else { return }
                 guard let troopModel = event.entityA as? ModelEntity else { return }
                 self.troops[troopModel.id]?.enemiesIds.append(creepModel.id)
-                creepBundle.animation?.pause()
-                self.troops[troopModel.id]?.rotate(to: creepBundle)
+                creep.animation?.pause()
+                self.troops[troopModel.id]?.rotate(to: creep)
                 let towerTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(tower.type.cadence(lvl: tower.lvl)), repeats: true) { timer in
                     guard self.troops[troopModel.id]?.enemiesIds.contains(creepModel.id) ?? false else { timer.invalidate() ; return }
-                    
-                    self.damageCreep(creepModel: creepModel, towerId: troopModel.id, attack: tower.type.attack(lvl: tower.lvl), audioType: "sword")
+                    self.damageCreep(creepModel: creep.model, attack: tower.type.attack(lvl: tower.lvl), audioType: .sword) { [weak self] in self?.killCreep(creep: creep, tower: tower)}
                 }
                 towerTimer.fire()
-                let creepTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(creepBundle.type.cadence), repeats: true) { timer in
+                let creepTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(creep.type.cadence), repeats: true) { timer in
                     guard self.creeps.keys.contains(creepModel.id) else { timer.invalidate() ; return }
-                    self.damageTroop(tower: tower, unitOffset: unitOffset, troopModel: troopModel, creepId: creepModel.id, attack: creepBundle.type.attack)
+                    self.damageTroop(tower: tower, unitOffset: unitOffset, troopModel: troopModel, creepId: creepModel.id, attack: creep.type.attack)
                 }
                 creepTimer.fire()
             }
@@ -660,7 +679,7 @@ extension GameViewModel {
     
     func deployBomb(speed baseSpeed: Float = 0.2, iterations: Int, bomb: AmmoBundle, tower: TowerBundle, creep: CreepBundle, topHeight: Float, counter: Int = 1) {
         guard iterations != counter else {
-            self.damageCreep(creepModel: creep.model, towerId: tower.model.id, attack: tower.type.attack(lvl: tower.lvl), audioType: "bomb")
+            self.damageCreep(creepModel: creep.model, attack: tower.type.attack(lvl: tower.lvl), audioType: .bomb) { [weak self] in self?.killCreep(creep: creep, tower: tower) }
             bomb.model.removeFromParent()
             bomb.subscriptions.last?.cancel()
             self.ammo.removeValue(forKey: bomb.model.id)
@@ -709,7 +728,7 @@ extension GameViewModel {
                 .filter(animation.isPlaybackController)
                 .sink( receiveValue: { [weak self] event in
                     guard let self = self else { return }
-                    self.damageCreep(creepModel: creep.model, towerId: tower.model.id, attack: tower.type.attack(lvl: tower.lvl), audioType: "bullet")
+                    self.damageCreep(creepModel: creep.model, attack: tower.type.attack(lvl: tower.lvl), audioType: .missile) { [weak self] in self?.killCreep(creep: creep, tower: tower)}
                     bullet.model.removeFromParent()
                     bullet.subscriptions.last?.cancel()
                     self.ammo.removeValue(forKey: bullet.model.id)
@@ -718,6 +737,15 @@ extension GameViewModel {
         }))
     }
     
+    func killCreep(creep: CreepBundle, tower: TowerBundle) {
+        self.coins += creep.type.reward
+        self.towers[tower.model.id]?.enemiesIds.removeAll(where: { id in id == creep.model.id })
+        creep.model.removeFromParent()
+        self.creeps.removeValue(forKey: creep.model.id)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.checkMissionCompleted()
+        }
+    }
     
     func damageTroop(tower: TowerBundle, unitOffset: SIMD3<Float>, troopModel: ModelEntity, creepId: UInt64, attack: Float) {
         guard let troopBundle = troops[troopModel.id], let (childIndex, child) = troopModel.children.enumerated().first(where: { $1.id == troops[troopModel.id]?.hpBarId }) else { return }
@@ -740,29 +768,13 @@ extension GameViewModel {
         troops[troopModel.id]?.hpBarId = hpBar.id
     }
     
-    func damageCreep(creepModel: ModelEntity, towerId: UInt64, attack: Float, audioType: String) {
+    func damageCreep(creepModel: ModelEntity, attack: Float, audioType: AudioSource, handler: () -> Void) {
+        
         guard let creepBundle = creeps[creepModel.id], let (childIndex, child) = creepModel.children.enumerated().first(where: { $1.id == creeps[creepModel.id]?.hpBarId }) else { return }
         creeps[creepModel.id]?.hp -= attack
-        
-        switch audioType {
-        case "bomb":
-            SoundsHandler.shared.playSound(AudioSource.bomb)
-        case "missile":
-            SoundsHandler.shared.playSound(AudioSource.missile)
-        case "sword":
-            SoundsHandler.shared.playSound(AudioSource.sword)
-        default:
-            SoundsHandler.shared.playSound(AudioSource.missile)
-        }
-        
+        SoundsHandler.shared.playSound(audioType)
         if creepBundle.hp < 0 {
-            coins += creepBundle.type.reward
-            towers[towerId]?.enemiesIds.removeAll(where: { id in id == creepModel.id })
-            creepModel.removeFromParent()
-            creeps.removeValue(forKey: creepModel.id)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.checkMissionCompleted()
-            }
+            handler()
         }
         let hpPercentage = creepBundle.hp / creepBundle.maxHP
         let hpBar = templates[Lifepoints.status(hp: hpPercentage).key]!.clone(recursive: true)

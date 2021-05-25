@@ -11,7 +11,7 @@ import RealityKit
 import GameplayKit
 
 enum MapLegend: CaseIterable {
-    case neutral, goal, lowerPlacing, higherPlacing, spawn, lowerPath, higherPath, zipLineIn, zipLineOut
+    case neutral, goal, lowerPlacing, higherPlacing, spawn, lowerPath, higherPath, zipLineIn, zipLineOut, hazard
 }
 
 enum Lifepoints: String, CaseIterable {
@@ -134,7 +134,7 @@ struct MapModel: Codable {
                 if position.row >= 0, position.row < rows,
                     position.column >= 0, position.column < columns,
                     !path.contains(where: { previous, _, _ in return (previous.row == position.row && previous.column == position.column) }),
-                    [MapLegend.lowerPath, .higherPath, .goal, .zipLineOut].contains(MapLegend.allCases[matrix[position.row][position.column]]) {
+                    [MapLegend.lowerPath, .higherPath, .goal, .hazard, .zipLineOut].contains(MapLegend.allCases[matrix[position.row][position.column]]) {
                     moveTo((position, direction, MapLegend.allCases[matrix[position.row][position.column]]), path: path)
                 } 
             }
