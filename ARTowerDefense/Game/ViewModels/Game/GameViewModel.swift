@@ -299,13 +299,13 @@ private extension GameViewModel {
                         let hpPercentage = creepHP / creepType.maxHP
                         let hpBar = self.templates[Lifepoints.status(hp: hpPercentage).key]!.clone(recursive: true)
                         hpBar.scale = [hpPercentage, 1.0, 1.0]
-                        creep.model.addChild(hpBar)
+                        creepModelBundle.model.addChild(hpBar)
                         hpBar.position.y = (bounds.extents.y / 2) + 0.003
-                        let creep = CreepBundle(bundle: creepModelBundle, hpBarId: hpBar.id, type: creepType, animation: nil)
-                        self.creeps[creep.model.id] = creep
-                        creep.entity.playAnimation(creep.entity.availableAnimations[0].repeat())
+                        let pendingCreep = CreepBundle(bundle: creepModelBundle, hpBarId: hpBar.id, type: creepType, animation: nil)
+                        self.creeps[pendingCreep.model.id] = pendingCreep
+                        pendingCreep.entity.playAnimation(pendingCreep.entity.availableAnimations[0].repeat())
                         SoundsHandler.shared.playSound(AudioSource.creep_spawn)
-                        self.deployUnit(creep, on: paths[self.waveCount % paths.count], setScale: 10)
+                        self.deployUnit(pendingCreep, on: paths[self.waveCount % paths.count], setScale: 10)
                     }
                     
                 } else {
