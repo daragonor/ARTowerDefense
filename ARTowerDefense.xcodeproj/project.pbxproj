@@ -248,7 +248,7 @@
 		7C8D5C42263DDE4F0016D837 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		7C8D5C44263DDE7D0016D837 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		7C8D5C4A2640798C0016D837 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
-		7C8D5C4E2640AE690016D837 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		7C8D5C4E2640AE690016D837 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7C8D5C502640AEA00016D837 /* GameViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelProtocol.swift; sourceTree = "<group>"; };
 		7C8D5C512640AEA00016D837 /* GameViewModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Enums.swift"; sourceTree = "<group>"; };
 		7C8D5C582644697F0016D837 /* TowerEnciclopediaViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TowerEnciclopediaViewCell.swift; path = ARTowerDefense/Game/Cells/TowerEnciclopedia/TowerEnciclopediaViewCell.swift; sourceTree = SOURCE_ROOT; };

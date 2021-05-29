@@ -27,8 +27,8 @@ class MenuViewModel {
 }
 
 extension MenuViewModel: MenuViewModelProtocol {
-    func toMission(index: Int, connected: Bool) {
-        viewState = .startMission(mission: index, connected: connected)
+    func toMission(index: Int, connected: Bool, sessionType: SessionType) {
+        viewState = .startMission(mission: index, connected: connected, sessionType: sessionType)
     }
     
     func presentMenu() {
@@ -55,20 +55,12 @@ extension MenuViewModel: MenuViewModelProtocol {
         viewState = .showContext(getMultiplayer())
     }
     
-    func toMultiplayerCoop() {
-        
+    func fetchConnectedPeers(_ sessionType: SessionType) {
+        viewState = .fetchConnectedPeers(sessionType: sessionType)
     }
     
-    func fetchConnectedPeers() {
-        viewState = .fetchConnectedPeers
-    }
-    
-    func toMultiplayerSpectator() {
-    
-    }
-    
-    func toMissions(connected: Bool) {
-        viewState = .showContext(getMissions(connected))
+    func toMissions(connected: Bool, sessionType: SessionType) {
+        viewState = .showContext(getMissions(connected, sessionType))
     }
     
     func toSettings() {
@@ -92,7 +84,7 @@ extension MenuViewModel {
         return [
             MenuTableViewCell.ViewModel(
                 title: "Missions",
-                onTap: { self.toMissions(connected: false) }),
+                onTap: { self.toMissions(connected: false, sessionType: .host) }),
             MenuTableViewCell.ViewModel(
                 title: "Multiplayer",
                 onTap: toMultiplayerMenu),
@@ -105,11 +97,11 @@ extension MenuViewModel {
         ]
     }
     
-    func getMissions(_ connected: Bool) -> [MenuCellViewModelProtocol] {
+    func getMissions(_ connected: Bool, _ sessionType: SessionType) -> [MenuCellViewModelProtocol] {
         let missions = config.missions.enumerated().map { (index, mission) in
             return MenuTableViewCell.ViewModel(
                     title: "Mission \(index + 1)",
-                onTap: { [weak self] in self?.toMission(index: index, connected: connected) })
+                onTap: { [weak self] in self?.toMission(index: index, connected: connected, sessionType: sessionType) })
         }
         return missions + [
             MenuTableViewCell.ViewModel(
@@ -122,13 +114,13 @@ extension MenuViewModel {
         return [
             MenuTableViewCell.ViewModel(
                 title: "Host",
-                onTap: { self.toMissions(connected: true) }),
+                onTap: { self.toMissions(connected: true, sessionType: .host) }),
             MenuTableViewCell.ViewModel(
                 title: "Co-op",
-                onTap: fetchConnectedPeers),
+                onTap: { self.fetchConnectedPeers(.coop) }),
             MenuTableViewCell.ViewModel(
                 title: "Spectator",
-                onTap: fetchConnectedPeers),
+                onTap: { self.fetchConnectedPeers(.spectator) }),
             MenuTableViewCell.ViewModel(
                 title: "Back",
                 onTap: toMainMenu)

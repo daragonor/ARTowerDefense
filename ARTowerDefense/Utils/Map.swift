@@ -86,6 +86,7 @@ typealias OrientedCoordinate = (coordinate: SIMD3<Float>, angle: Float, position
 
 struct MapModel: Codable {
     var matrix: [[Int]]
+    
     var rows: Int
     var columns: Int
     var allPaths = [[OrientedPosition]]()

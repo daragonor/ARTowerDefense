@@ -9,7 +9,7 @@ import Foundation
 enum MenuViewState {
     case empty
     case showContext(_ context: [CellViewModelProtocol & MenuCellViewModelProtocol])
-    case startMission(mission: Int, connected: Bool)
+    case startMission(mission: Int, connected: Bool, sessionType: SessionType)
     case setGameConfiguration(config: GameConfig)
-    case fetchConnectedPeers
+    case fetchConnectedPeers(sessionType: SessionType)
 }

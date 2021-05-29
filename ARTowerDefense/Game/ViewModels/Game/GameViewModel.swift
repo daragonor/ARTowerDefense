@@ -10,25 +10,33 @@ import Combine
 import RealityKit
 import ARKit
 
+enum SessionType: String {
+//    case single
+    case host
+    case coop
+    case spectator
+    var key: String { rawValue }
+}
+
 class GameViewModel {
     @Published var viewState: GameViewState
     
     var config: GameConfig!
+    var sessionType: SessionType = .host
     var templates: [String : Entity] = .init()
-
+    
     var waveCount: Int = .init()
     var usedMaps: Int = .init()
     var playerHp: Int = .init()
     var coins: Int = .init()
     var currentMission: Int?
-
+    
     var terrainAnchors: [AnchorEntity] = .init()
-    var selectedPlacing: PlacingBundle?
-
-//    var glyphs: [UInt64 : ModelEntity] = .init()
+    var selectedPlacings: [UInt64: SessionType] = .init()
+    
     var spawnPlaces: [SpawnBundle] = .init()
     var ziplineTransportPlaces: [SpawnBundle] = .init()
-
+    
     var creeps: [UInt64 : CreepBundle] = .init()
     var placings: [UInt64 : PlacingBundle] = .init()
     var towers: [UInt64 : TowerBundle] = .init()
@@ -36,6 +44,7 @@ class GameViewModel {
     var ammo: [UInt64 : AmmoBundle] = .init()
     var pendingDeliveryCreeps: [(Float, CreepType)] = .init()
     var networkStatus: Bool = false
+    var hasMissionStarted = false
     private var cancellables: Set<AnyCancellable> = .init()
     private var arView: ARView!
     var gameTimer: Timer?
@@ -47,7 +56,7 @@ class GameViewModel {
 
 extension GameViewModel: GameViewModelProtocol {
     var viewStatePublisher: Published<GameViewState>.Publisher { $viewState }
-
+    
     func putMap(on transform: simd_float4x4) {
         let arAnchor = ARAnchor(name: "Anchor Terrain", transform: transform)
         let terrainAnchor = AnchorEntity(anchor: arAnchor)
@@ -60,38 +69,42 @@ extension GameViewModel: GameViewModelProtocol {
         insertMap(anchor: terrainAnchor, map: maps[usedMaps])
         usedMaps += 1
         if maps.count == usedMaps {
-            viewState = .updateStripe(context: getStripe(for: .ready))
+            viewState = .updateStrip(context: getStripe(for: .ready))
             viewState = .disableFocusView
         } else {
-            viewState = .updateStripe(context: getStripe(for: .undo))
+            viewState = .updateStrip(context: getStripe(for: .undo))
         }
     }
     
-    func putTower(on entities: [Entity]) {
-        if let tappedPlacing = placings.first(where: { id, _ in entities.contains(where: {$0.id == id}) }) {
-            if tappedPlacing.key == selectedPlacing?.model.id {
-                selectedPlacing = nil
-                towers.forEach { $1.accessory.isEnabled = false }
-                viewState = .updateStripe(context: getStripe(for: .none))
+    func checkPlacing(on entities: [UInt64], source: SessionType = .host) {
+        if hasMissionStarted, let tappedPlacing = placings.filter({entities.contains($1.model.synchronization?.identifier ?? 0)}).first {
+            if selectedPlacings.map({$0.key}).contains(tappedPlacing.key) {
+                placings
+                    .compactMap({_ ,placing in towers.first(where: {tower in tower.value.model.id == placing.towerId})})
+                    .forEach({$0.value.accessory.isEnabled = false})
+                selectedPlacings[tappedPlacing.key] = nil
+                updateSyncStrip(with: source, for: .none)
             } else {
-                selectedPlacing = tappedPlacing.value
-                towers.forEach { $1.accessory.isEnabled = false }
+                selectedPlacings[tappedPlacing.key] = source
+                placings.compactMap({_ ,placing in towers.first(where: {tower in tower.value.model.id == placing.towerId})})
+                    .forEach({$0.value.accessory.isEnabled = false})
+                
                 if let tappedTowerId = tappedPlacing.value.towerId {
                     guard let towerBundle = towers.first(where: { id, _ in id == tappedTowerId })?.value else { return }
                     towerBundle.accessory.isEnabled = true
-                    viewState = .updateStripe(context: getStripe(for: .tower(type: towerBundle.type)))
-
+                    updateSyncStrip(with: source, for: .tower(type: towerBundle.type, lvl: towerBundle.lvl))
                 } else {
-                    viewState = .updateStripe(context: getStripe(for: .placing))
+                    updateSyncStrip(with: source, for: .placing)
                 }
             }
         }
     }
-            
+    
     
     func cleanValues() {
         terrainAnchors.forEach { terrain in terrain.removeFromParent() }
         currentMission = nil
+        hasMissionStarted = false
         //limpiar todos los arreglos
         spawnPlaces = []
         creeps = [:]
@@ -101,26 +114,141 @@ extension GameViewModel: GameViewModelProtocol {
         ammo = [:]
         ziplineTransportPlaces = []
         pendingDeliveryCreeps = []
-        viewState = .returnToMenu(connected: networkStatus)
+        viewState = .returnToMenu(connected: networkStatus, sessionType: sessionType)
+        updateSyncStrip(with: sessionType, for: .none)
     }
     
     func setGameConfig(_ config: GameConfig) {
         self.config = config
     }
     
-    func loadMission(_ mission: Int, _ connected: Bool) {
-        updateInitialValues(for: mission)
-        networkStatus = connected
-        loadTemplatesIfNeeded(connected)
-        enableFocusView()
+    func loadMission(_ mission: Int, _ connected: Bool, _ source: SessionType) {
+        self.sessionType = source
+        self.networkStatus = connected
+        self.hasMissionStarted = false
+        self.loadTemplatesIfNeeded(connected)
+        if [.host].contains(sessionType) {
+            self.updateInitialValues(for: mission)
+            self.enableFocusView()
+        }
     }
     
     func enableFocusView() {
         viewState = .enableFocusView
     }
+    
+    func updateSyncStrip(with source: SessionType, for state: StripState) {
+        if source == .coop {
+            switch state {
+            case .placing:
+                viewState = .sendPeerData(collabKey: .recievePlacingStatus, data: try? JSONEncoder().encode("placing"))
+            case .tower(let type, let lvl):
+                viewState = .sendPeerData(collabKey: .recievePlacingStatus, data: try? JSONEncoder().encode("\(type.key)-\(lvl)"))
+            case .none:
+                viewState = .sendPeerData(collabKey: .recievePlacingStatus, data: try? JSONEncoder().encode("none"))
+            default: break
+            }
+        } else {
+            viewState = .updateStrip(context: getStripe(for: state))
+        }
+    }
 }
 
-private extension GameViewModel {
+extension GameViewModel {
+    func getStripe(for state: StripState, from source: SessionType = .host) -> [CellViewModelProtocol] {
+        return state.strip.map { option in
+            var onTap: () -> Void = {}
+            var title: String? = .init()
+            switch option {
+            case .upgrade(let type, let lvl):
+                title = lvl == lvl.nextLevel ? "MAX" : "\(type.cost(lvl: lvl.nextLevel))"
+                onTap = { self.upgradeTower(with: type, towerLvl: lvl, from: source) }
+            case .sell(let type, let lvl):
+                title = "\(Int(Float(type.cost(lvl: lvl)) * 0.5))"
+                onTap = { self.sellTower(with: type, towerLvl: lvl, from: source) }
+
+            case .rotateRight:
+                title = nil
+                onTap = { self.rotateTower(clockwise: true, from: source) }
+
+            case .rotateLeft:
+                title = nil
+                onTap = { self.rotateTower(clockwise: false, from: source) }
+
+            case .tower(let type):
+                title = "\(type.cost(lvl: .lvl1))"
+                onTap = { self.placeTower(with: type, from: source) }
+            case .undo:
+                title = "Undo"
+                onTap = undoPlacing
+            case .start:
+                title = "Start"
+                onTap = startMission
+            }
+            return StripViewCell.ViewModel(image: option.iconImage, title: title, onTap: onTap)
+        }
+    }
+    
+    func rotateTower(clockwise: Bool, from source: SessionType) {
+        if sessionType == .coop {
+            viewState = .sendPeerData(collabKey: .rotateTower, data: try? JSONEncoder().encode(clockwise))
+        } else {
+            guard let placingId = selectedPlacings.first(where:{$0.value == source})?.key,
+                  let towerId = placings[placingId]?.towerId,
+                  let tower = towers[towerId] else { return }
+            let angle = tower.model.transform.rotation.angle + .pi/2 * (clockwise ? -1 : 1)
+            tower.model.transform.rotation = simd_quatf(angle: angle, axis: Axis.y.matrix)
+        }
+    }
+    
+    func upgradeTower(with towerType: TowerType, towerLvl: TowerLevel, from source: SessionType) {
+        if sessionType == .coop {
+            viewState = .sendPeerData(collabKey: .upgradeTower, data: try? JSONEncoder().encode("\(towerType)-\(towerLvl)"))
+        } else {
+            guard let placingId = selectedPlacings.first(where:{$0.value == source})?.key,
+                  let towerId = placings[placingId]?.towerId,
+                  let tower = towers[towerId] else { return }
+            guard towerType.cost(lvl: towerLvl) <= coins else { return }
+            DispatchQueue.main.async { [self] in
+                tower.model.removeFromParent()
+                self.insertTower(towerType: tower.type, towerLvl: tower.lvl.nextLevel, source: source)
+                self.updateSyncStrip(with: source, for: .tower(type: towerType, lvl: towerLvl))
+                self.towers.removeValue(forKey: towerId)
+            }
+        }
+    }
+        
+    
+    
+    func sellTower(with towerType: TowerType, towerLvl: TowerLevel, from source: SessionType) {
+        if sessionType == .coop {
+            viewState = .sendPeerData(collabKey: .sellTower, data: try? JSONEncoder().encode("\(towerType)-\(towerLvl)"))
+        } else {
+            guard let placingId = selectedPlacings.first(where:{$0.value == source})?.key,
+                  let towerId = placings[placingId]?.towerId,
+                  let tower = towers[towerId] else { return }
+            DispatchQueue.main.async { [self] in
+                placings[placingId]?.towerId = nil
+                towers.removeValue(forKey: towerId)
+                tower.model.removeFromParent()
+                coins += Int(Float(tower.type.cost(lvl: tower.lvl)) * 0.5)
+                self.updateSyncStrip(with: source, for: .placing)
+            }
+        }
+    }
+
+    
+    func placeTower(with towerType: TowerType, from source: SessionType) {
+        if sessionType == .coop {
+            viewState = .sendPeerData(collabKey: .insertTower, data: try? JSONEncoder().encode(towerType.key))
+        } else {
+            guard towerType.cost(lvl: .lvl1) <= coins else { return }
+            DispatchQueue.main.async {
+                self.insertTower(towerType: towerType, towerLvl: .lvl1, source: source)
+            }
+            updateSyncStrip(with: source, for: .tower(type: towerType, lvl: .lvl1))
+        }
+    }
     
     func loadTemplatesIfNeeded(_ connected: Bool) {
         guard templates.isEmpty else {
@@ -147,7 +275,7 @@ private extension GameViewModel {
                         }
                         self.viewState = .hideLoadingAssets
                         self.viewState = .loadAnchorConfiguration(connected)
-
+                        
                     }
                     let factor =
                         ModelType(rawValue: name.snakeCasetoCamelCase())?.scalingFactor ??
@@ -162,45 +290,10 @@ private extension GameViewModel {
         }
     }
     
-    func getStripe(for state: StripState) -> [CellViewModelProtocol] {
-        return state.strip.map { option in
-            var onTap: () -> Void = {}
-            var title: String? = .init()
-            switch option {
-            case .upgrade:
-                guard let towerId = selectedPlacing?.towerId, let tower = towers[towerId] else { break }
-                title = tower.lvl == tower.lvl.nextLevel ? "MAX" : "\(tower.type.cost(lvl: tower.lvl.nextLevel))"
-                onTap = upgradeTower
-            case .sell:
-                guard let towerId = selectedPlacing?.towerId, let tower = towers[towerId] else { break }
-                title = "\(Int(Float(tower.type.cost(lvl: tower.lvl)) * 0.5))"
-            case .tower(let type):
-                title = "\(type.cost(lvl: .lvl1))"
-                onTap = { self.placeTower(with: type) }
-            case .rotateRight:
-                title = nil
-            case .rotateLeft:
-                title = nil
-            case .undo:
-                title = "Undo"
-                onTap = undoPlacing
-            case .start:
-                title = "Start"
-                onTap = startMission
-            }
-            return StripViewCell.ViewModel(image: option.iconImage, title: title, onTap: onTap)
-        }
-    }
-    
-    func placeTower(with towerType: TowerType) {
-        guard towerType.cost(lvl: .lvl1) <= coins else { return }
-        insertTower(towerType: towerType, towerLvl: .lvl1)
-        viewState = .updateStripe(context: getStripe(for: .tower(type: towerType)))
-    }
-    
     func startMission() {
         setupGameInfo()
-        viewState = .updateStripe(context: getStripe(for: .none))
+        hasMissionStarted = true
+        viewState = .updateStrip(context: getStripe(for: .none))
     }
     
     func setupGameInfo() {
@@ -209,13 +302,13 @@ private extension GameViewModel {
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             guard let self = self, let mission = self.currentMission else { return }
             self.coins += 5
-            self.viewState = .updateCoins(self.coins)
+            self.viewState = .updateCoins("\(self.coins)")
             if graceTimer >= 0 {
-                self.viewState = .updateWaves(value: "0:\(graceTimer < 10 ? "0" : "")\(graceTimer)")
+                self.viewState = .updateWaves("0:\(graceTimer < 10 ? "0" : "")\(graceTimer)")
                 if graceTimer == 0 {
                     self.sendWaves(mission: mission, wave: self.waveCount)
                     self.waveCount += 1
-                    self.viewState = .updateWaves(value: "\(self.waveCount)/\(self.config.missions[mission].waves.count)")
+                    self.viewState = .updateWaves( "\(self.waveCount)/\(self.config.missions[mission].waves.count)")
                 }
                 graceTimer -= 1
             } else {
@@ -278,7 +371,7 @@ private extension GameViewModel {
                     SoundsHandler.shared.playSound(AudioSource.creep_finish)
                     self.creeps.removeValue(forKey: creep.model.id)
                     self.playerHp -= 1
-                    self.viewState = .updateHP(self.playerHp)
+                    self.viewState = .updateHP("\(self.playerHp)")
                     self.checkMissionCompleted()
                 case .zipLineOut:
                     self.pendingDeliveryCreeps.insert((creep.hp, creep.type), at: .zero)
@@ -288,15 +381,15 @@ private extension GameViewModel {
                         guard let (creepHP, creepType) = self.pendingDeliveryCreeps.popLast(), let mission = self.currentMission else { return }
                         let spawn = self.ziplineTransportPlaces[Int.random(in: 0...1)]
                         let missionConfig = self.config.missions[mission]
-
+                        
                         let paths = missionConfig.maps[spawn.map].creepPathsCoordinates(at: spawn.position, diameter: self.config.initialValues.gridDiameter)
-
+                        
                         let creepModelBundle: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
                         creepModelBundle.model.position.y += 0.03
                         let bounds = creepModelBundle.entity.visualBounds(relativeTo: creepModelBundle.model)
                         creepModelBundle.model.collision = CollisionComponent(shapes: [ShapeResource.generateBox(size: SIMD3(repeating: 0.0015))], mode: .trigger, filter: CollisionFilter(group: Filter.creeps.group, mask: Filter.towers.group))
                         spawn.model.anchor?.addChild(creepModelBundle.model)
-
+                        
                         let hpPercentage = creepHP / creepType.maxHP
                         let hpBar = self.templates[Lifepoints.status(hp: hpPercentage).key]!.clone(recursive: true)
                         hpBar.scale = [hpPercentage, 1.0, 1.0]
@@ -334,15 +427,11 @@ private extension GameViewModel {
         creep.subscription = subscription
     }
     
-    func upgradeTower() {
-        
-    }
-    
     func undoPlacing() {
         if let lastMap = terrainAnchors.last {
             lastMap.removeFromParent()
             usedMaps -= 1
-            viewState = .updateStripe(context: getStripe(for: .undo))
+            viewState = .updateStrip(context: getStripe(for: .undo))
             viewState = .enableFocusView
         }
     }
@@ -353,9 +442,9 @@ private extension GameViewModel {
         self.coins = config.initialValues.coins
         self.waveCount = .zero
         self.usedMaps = .zero
-        self.viewState = .updateCoins(config.initialValues.coins)
-        self.viewState = .updateHP(config.initialValues.playerHp)
-        self.viewState = .updateWaves(value: "0/\(config.missions[mission].waves.count)")
+        self.viewState = .updateCoins("\(config.initialValues.coins)")
+        self.viewState = .updateHP("\(config.initialValues.playerHp)")
+        self.viewState = .updateWaves("0/\(config.missions[mission].waves.count)")
     }
     
     func insertMap(anchor: AnchorEntity, map: MapModel) {
@@ -363,7 +452,7 @@ private extension GameViewModel {
         let columns = map.matrix.first!.count
         var neutralCount = 0
         var higherPathCount = 0
-//        var lowerPathCount = 0
+        //        var lowerPathCount = 0
         for row in 0..<rows {
             for column in 0..<columns {
                 let rowDistance = Float(rows / 2) - config.initialValues.gridDiameter
@@ -380,57 +469,57 @@ private extension GameViewModel {
                     anchor.addChild(station.model)
                 case .neutral:
                     switch currentMission {
-                        case 0:
-                            let ground = templates[neutral_Lvl01[neutralCount].key]!.embeddedModel(at: [x, 0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl01[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl01.count {
-                                neutralCount = 0
-                            }
-                        case 1:
-                            let ground = templates[neutral_Lvl02[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl02[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl02.count {
-                                neutralCount = 0
-                            }
-                        case 2:
-                            let ground = templates[neutral_Lvl03[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl03[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl03.count {
-                                neutralCount = 0
-                            }
-                        case 3:
-                            let ground = templates[neutral_Lvl04[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl04[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl04.count {
-                                neutralCount = 0
-                            }
-                        case 4:
-                            let ground = templates[neutral_Lvl05[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl05[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl05.count {
-                                neutralCount = 0
-                            }
-                        case 5:
-                            let ground = templates[neutral_Lvl06[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
-                            ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl06[neutralCount].rY.angle, axis: [0, 1, 0])
-                            neutralCount += 1
-                            anchor.addChild(ground.model)
-                            if neutralCount == neutral_Lvl06.count {
-                                neutralCount = 0
-                            }
-                        default:
-                            let ground = templates[LevelType.lvl05_ground004.key]!.embeddedModel(at: [x, 0.001, z])
-                            anchor.addChild(ground.model)
+                    case 0:
+                        let ground = templates[neutral_Lvl01[neutralCount].key]!.embeddedModel(at: [x, 0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl01[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl01.count {
+                            neutralCount = 0
+                        }
+                    case 1:
+                        let ground = templates[neutral_Lvl02[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl02[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl02.count {
+                            neutralCount = 0
+                        }
+                    case 2:
+                        let ground = templates[neutral_Lvl03[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl03[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl03.count {
+                            neutralCount = 0
+                        }
+                    case 3:
+                        let ground = templates[neutral_Lvl04[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl04[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl04.count {
+                            neutralCount = 0
+                        }
+                    case 4:
+                        let ground = templates[neutral_Lvl05[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl05[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl05.count {
+                            neutralCount = 0
+                        }
+                    case 5:
+                        let ground = templates[neutral_Lvl06[neutralCount].key]!.embeddedModel(at: [x,0.001, z])
+                        ground.entity.transform.rotation = simd_quatf(angle: neutral_Lvl06[neutralCount].rY.angle, axis: [0, 1, 0])
+                        neutralCount += 1
+                        anchor.addChild(ground.model)
+                        if neutralCount == neutral_Lvl06.count {
+                            neutralCount = 0
+                        }
+                    default:
+                        let ground = templates[LevelType.lvl05_ground004.key]!.embeddedModel(at: [x, 0.001, z])
+                        anchor.addChild(ground.model)
                     }
                     break
                 case .zipLineIn:
@@ -461,9 +550,9 @@ private extension GameViewModel {
                                         floor.entity.transform.rotation = simd_quatf(angle: direction.angle, axis: [0, 1, 0])
                                         return floor
                                     }
-//                                    let floor = templates[ModelType.pathUpwards.key]!.embeddedModel(at: [x, 0.001, z])
-//                                    floor.entity.transform.rotation = simd_quatf(angle: direction.angle, axis: [0, 1, 0])
-//                                    return floor
+                                    //                                    let floor = templates[ModelType.pathUpwards.key]!.embeddedModel(at: [x, 0.001, z])
+                                    //                                    floor.entity.transform.rotation = simd_quatf(angle: direction.angle, axis: [0, 1, 0])
+                                    //                                    return floor
                                 }
                             }
                         }
@@ -487,32 +576,32 @@ private extension GameViewModel {
                                         floor.entity.transform.rotation = simd_quatf(angle: direction.angle + .pi, axis: [0, 1, 0])
                                         return floor
                                     }
-//                                    let floor = templates[ModelType.pathDownwards.key]!.embeddedModel(at: [x, 0.1, z])
+                                    //                                    let floor = templates[ModelType.pathDownwards.key]!.embeddedModel(at: [x, 0.1, z])
                                     
                                 }
                             }
                         }
-//                        return templates[ModelType.path.key]!.embeddedModel(at: [x, 0.1, z])
+                        //                        return templates[ModelType.path.key]!.embeddedModel(at: [x, 0.1, z])
                         print("higherPathCount")
                         print(higherPathCount)
                         switch currentMission {
-                            case 3:
-                                let higherPath = templates[higherPath_Lvl04[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
-                                higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl04[higherPathCount].rY.angle, axis: [0, 1, 0])
-                                higherPathCount += 1
-                                return higherPath
-                            case 4:
-                                let higherPath = templates[higherPath_Lvl05[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
-                                higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl05[higherPathCount].rY.angle, axis: [0, 1, 0])
-                                higherPathCount += 1
-                                return higherPath
-                            case 5:
-                                let higherPath = templates[higherPath_Lvl06[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
-                                higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl06[higherPathCount].rY.angle, axis: [0, 1, 0])
-                                higherPathCount += 1
-                                return higherPath
-                            default:
-                                return templates[LevelType.lvl04_higherpath001.key]!.embeddedModel(at: [x,0.001, z])
+                        case 3:
+                            let higherPath = templates[higherPath_Lvl04[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
+                            higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl04[higherPathCount].rY.angle, axis: [0, 1, 0])
+                            higherPathCount += 1
+                            return higherPath
+                        case 4:
+                            let higherPath = templates[higherPath_Lvl05[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
+                            higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl05[higherPathCount].rY.angle, axis: [0, 1, 0])
+                            higherPathCount += 1
+                            return higherPath
+                        case 5:
+                            let higherPath = templates[higherPath_Lvl06[higherPathCount].key]!.embeddedModel(at: [x, 0.001, z])
+                            higherPath.entity.transform.rotation = simd_quatf(angle: higherPath_Lvl06[higherPathCount].rY.angle, axis: [0, 1, 0])
+                            higherPathCount += 1
+                            return higherPath
+                        default:
+                            return templates[LevelType.lvl04_higherpath001.key]!.embeddedModel(at: [x,0.001, z])
                         }
                     }
                     anchor.addChild(floor.model)
@@ -556,16 +645,16 @@ private extension GameViewModel {
 
 // MARK:- Insert Tower
 extension GameViewModel {
-    func insertTower(towerType: TowerType, towerLvl: TowerLevel) {
-        guard let placingPosition = selectedPlacing?.model.position, let anchor = selectedPlacing?.model.anchor as? AnchorEntity else { return }
-        
+    func insertTower(towerType: TowerType, towerLvl: TowerLevel, source: SessionType) {
+        guard let selectedPlacing = placings.first(where: {$0.key == selectedPlacings.first(where: {$0.value == source})?.key})?.value, let anchor = selectedPlacing.model.anchor as? AnchorEntity else { return }
+        let placingPosition = selectedPlacing.model.position
         coins -= towerType.cost(lvl: towerLvl)
         let towerModel: ModelBundle = templates[towerType.key(towerLvl)]!.embeddedModel(at: placingPosition)
         SoundsHandler.shared.playSound(AudioSource.tower_building)
         placings.keys.forEach { id in
-            if id == selectedPlacing?.model.id {
+            if id == selectedPlacing.model.id {
                 placings[id]?.towerId = towerModel.model.id
-                selectedPlacing?.towerId = towerModel.model.id
+                selectedPlacing.towerId = towerModel.model.id
             }
         }
         
@@ -573,13 +662,13 @@ extension GameViewModel {
         anchor.addChild(towerModel.model)
         ///Tower range accesorry
         let diameter = 2.0 * config.initialValues.gridDiameter * towerType.range * 0.1
-        
-        let rangeAccessory = ModelEntity(mesh: .generateBox(size: SIMD3(x: diameter, y: 0.02, z: diameter), cornerRadius: 0.025), materials: [SimpleMaterial(color: UIColor.red.withAlphaComponent(0.05), isMetallic: false)])
+        let color = [.host].contains(source) ? UIColor.red : UIColor.blue
+        let rangeAccessory = ModelEntity(mesh: .generateBox(size: SIMD3(x: diameter, y: 0.02, z: diameter), cornerRadius: 0.025), materials: [SimpleMaterial(color: color.withAlphaComponent(0.05), isMetallic: false)])
         towerModel.model.addChild(rangeAccessory)
         rangeAccessory.position.y += 0.02
         let tower = TowerBundle(bundle: towerModel, type: towerType, lvl: towerLvl, accessory: rangeAccessory)
         towers[tower.model.id] = tower
-
+        
         
         if towerType == .barracks {
             rangeAccessory.position.z += diameter
@@ -637,7 +726,7 @@ extension GameViewModel {
         troopHPbar.position.y = (bounds.extents.y / 2) + 0.003
         troop.entity.playAnimation(troop.entity.availableAnimations[0].repeat())
         troops[troop.model.id] = TroopBundle(bundle: troop, hpBarId: troopHPbar.id,maxHP: tower.type.maxHP(lvl: tower.lvl), towerId: tower.model.id)
-
+        
         let endSubs = arView.scene.subscribe(to: CollisionEvents.Ended.self, on: troop.model) {
             event in
             guard let creep = event.entityB as? ModelEntity else { return }
@@ -712,29 +801,31 @@ extension GameViewModel {
         var towerTransform = tower.entity.transform
         towerTransform.rotation = tower.model.angle(targetPosition: creep.model.position)
         let towerAnimation = tower.entity.move(to: towerTransform, relativeTo: tower.model, duration: TimeInterval(0.1), timingFunction: .linear)
-        tower.subscribes.append(arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
-            .filter { $0.playbackController == towerAnimation }
-            .sink(receiveValue: { [weak self] _ in
-            guard let self = self else { return }
-            let bullet = AmmoBundle(bundle: self.templates[ModelType.bullet.key]!.embeddedModel(at: placingPosition))
-            self.ammo[bullet.model.id] = bullet
-            bullet.model.transform.translation.y += 0.015
-            anchor.addChild(bullet.model)
-            var bulletTransform = bullet.model.transform
-            bulletTransform.translation = creep.model.position
-            bullet.rotate(to: creep)
-            let animation = bullet.model.move(to: bulletTransform, relativeTo: bullet.model.anchor, duration: 0.1, timingFunction: .linear)
-            let subscription = self.arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
-                .filter(animation.isPlaybackController)
-                .sink( receiveValue: { [weak self] event in
+        tower.subscribes.append(
+            arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
+                .filter { $0.playbackController == towerAnimation }
+                .sink(receiveValue: { [weak self] _ in
                     guard let self = self else { return }
-                    self.damageCreep(creepModel: creep.model, attack: tower.type.attack(lvl: tower.lvl), audioType: .missile) { [weak self] in self?.killCreep(creep: creep, tower: tower)}
-                    bullet.model.removeFromParent()
-                    bullet.subscriptions.last?.cancel()
-                    self.ammo.removeValue(forKey: bullet.model.id)
+                    let bullet = AmmoBundle(bundle: self.templates[ModelType.bullet.key]!.embeddedModel(at: placingPosition))
+                    self.ammo[bullet.model.id] = bullet
+                    bullet.model.transform.translation.y += 0.015
+                    anchor.addChild(bullet.model)
+                    var bulletTransform = bullet.model.transform
+                    bulletTransform.translation = creep.model.position
+                    bullet.rotate(to: creep)
+                    let animation = bullet.model.move(to: bulletTransform, relativeTo: bullet.model.anchor, duration: 0.1, timingFunction: .linear)
+                    let subscription = self.arView.scene.publisher(for: AnimationEvents.PlaybackCompleted.self)
+                        .filter(animation.isPlaybackController)
+                        .sink( receiveValue: { [weak self] event in
+                            guard let self = self else { return }
+                            self.damageCreep(creepModel: creep.model, attack: tower.type.attack(lvl: tower.lvl), audioType: .missile) { [weak self] in self?.killCreep(creep: creep, tower: tower)}
+                            bullet.model.removeFromParent()
+//                            bullet.subscriptions.last?.cancel()
+                            self.ammo.removeValue(forKey: bullet.model.id)
+                        })
+                    bullet.subscriptions.append(subscription)
                 })
-            bullet.subscriptions.append(subscription)
-        }))
+        )
     }
     
     func killCreep(creep: CreepBundle, tower: TowerBundle) {

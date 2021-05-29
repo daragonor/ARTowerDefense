@@ -116,6 +116,7 @@ enum TowerLevel: String, CaseIterable {
 
 enum TowerType: String, CaseIterable {
     case turret, launcher, barracks
+    var key: String { rawValue }
     func key(_ lvl: TowerLevel) -> String {
         return "\(self.rawValue)_\(lvl.rawValue)"
     }

@@ -12,20 +12,21 @@ enum GameViewState {
     case empty
     case enableFocusView
     case disableFocusView
-    case returnToMenu(connected: Bool)
-    case updateStripe(context: [CellViewModelProtocol])
-    case updateCoins(_ coins: Int)
-    case updateHP(_ hp: Int)
-    case updateWaves(value: String)
+    case returnToMenu(connected: Bool, sessionType: SessionType)
+    case updateStrip(context: [CellViewModelProtocol])
+    case updateCoins(_ coins: String)
+    case updateHP(_ hp: String)
+    case updateWaves(_ value: String)
     case loadAnchorConfiguration(_ connected: Bool)
     case showLoadingAssets
     case hideLoadingAssets
     case showMissionCompleted
     case startMission
+    case sendPeerData(collabKey: CollaborativeSessionKeys, data: Data?)
 }
 
 enum StripOption {
-    case upgrade, sell, tower(_ type: TowerType), rotateRight, rotateLeft, undo, start
+    case upgrade(type: TowerType, lvl: TowerLevel), sell(type: TowerType, lvl: TowerLevel), tower(_ type: TowerType), rotateRight, rotateLeft, undo, start
 
     var iconImage: UIImage {
         switch self {
@@ -45,15 +46,14 @@ enum StripOption {
     }
 }
 enum StripState {
-    case none, undo, ready, placing, tower(type: TowerType)
+    case none, undo, ready, placing, tower(type: TowerType, lvl: TowerLevel)
     var strip: [StripOption] {
         switch self {
         case .undo: return [.undo]
         case .ready: return [.undo, .start]
         case .placing: return TowerType.allCases.map { StripOption.tower($0) }
-//            [.tower(.turret), .tower(.launcher), .tower(.barracks)]
-        case .tower(let type):
-            var options: [StripOption] = [.upgrade, .sell]
+        case .tower(let type, let lvl):
+            var options: [StripOption] = [.upgrade(type: type, lvl: lvl), .sell(type: type, lvl: lvl)]
             if type == .barracks { options += [.rotateLeft, .rotateRight] }
             return options
         case .none: return []

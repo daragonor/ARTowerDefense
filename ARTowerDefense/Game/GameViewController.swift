@@ -15,7 +15,6 @@ class GameViewController: UIViewController {
     @IBOutlet var arView: ARView!
     var arConfig: ARWorldTrackingConfiguration!
     var multipeerHelper: MultipeerHelper!
-    
     @IBOutlet weak var gameInfoStackView: UIStackView!
     @IBOutlet weak var coinsLabel: UILabel!
     @IBOutlet weak var hpLabel: UILabel!
@@ -27,7 +26,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var menuHeightConstraint: NSLayoutConstraint!
     
     var focusEntity: FocusEntity?
-    var canRayCast: Bool = true
+    var canRayCast: Bool = false
     private var cancellables: Set<AnyCancellable> = .init()
     
     lazy var menuViewModel: MenuViewModelProtocol = { return MenuViewModel() }()
@@ -64,7 +63,7 @@ class GameViewController: UIViewController {
             guard let self = self else { return }
             switch viewState {
             case .empty: break
-            case .fetchConnectedPeers:
+            case .fetchConnectedPeers(let sessionType):
                 if self.multipeerHelper.connectedPeers.isEmpty {
                     
                 } else {
@@ -75,6 +74,7 @@ class GameViewController: UIViewController {
                         guard let self = self else { return }
                         self.showLoadingAlert(message: "Connecting")
                     }
+                    self.gameViewModel.sessionType = sessionType
                     self.multipeerHelper.sendToAllPeers(data)
                 }
             case .showContext(let context):
@@ -89,8 +89,8 @@ class GameViewController: UIViewController {
                     self.menuHeightConstraint.constant = min(newHeight, maxHeight)
                     self.menuTableView.reloadData()
                 }
-            case .startMission(let mission, let connected):
-                self.gameViewModel.loadMission(mission, connected)
+            case .startMission(let mission, let connected, let sessionType):
+                self.gameViewModel.loadMission(mission, connected, sessionType)
                 self.gameInfoStackView.isHidden = false
                 self.menuTableView.isHidden = true
             case .setGameConfiguration(let config):
@@ -111,14 +111,19 @@ class GameViewController: UIViewController {
             guard let self = self else { return }
             switch viewState {
             case .empty: break
-            case .returnToMenu(let networkStatus):
-                self.menuViewModel.toMissions(connected: networkStatus)
-            case .updateStripe(let context):
+            case .returnToMenu(let networkStatus, let sessionType):
+                self.menuViewModel.toMissions(connected: networkStatus, sessionType: sessionType)
+            case .updateStrip(let context):
                 self.stripContext = context
                 DispatchQueue.main.async { [weak self] in
                     self?.stripTableView.reloadData()
                 }
+            case .sendPeerData(let collab, let data):
+                let model = CollaborativeSessionModel(key: collab.key, parameters: data)
+                guard let data = try? JSONEncoder().encode(model) else { return }
+                self.multipeerHelper.sendToAllPeers(data)
             case .enableFocusView:
+                guard [.host].contains(self.gameViewModel.sessionType) else { return }
                 self.canRayCast = true
                 if self.focusEntity == nil {
                     self.focusEntity = FocusEntity(on: self.arView, focus: .classic)
@@ -140,11 +145,20 @@ class GameViewController: UIViewController {
                 self.loadAnchorConfiguration(connected)
                 self.gameViewModel.enableFocusView()
             case .updateCoins(let coins):
-                self.coinsLabel.text = "\(coins)"
+                self.coinsLabel.text = coins
+                let model = CollaborativeSessionModel(key: CollaborativeSessionKeys.updateCoins.key, parameters: try? JSONEncoder().encode(coins))
+                guard let data = try? JSONEncoder().encode(model) else { break }
+                self.multipeerHelper.sendToAllPeers(data)
             case .updateHP(let lifepoints):
-                self.hpLabel.text = "\(lifepoints)"
+                self.hpLabel.text = lifepoints
+                let model = CollaborativeSessionModel(key: CollaborativeSessionKeys.updateHP.key, parameters: try? JSONEncoder().encode(lifepoints))
+                guard let data = try? JSONEncoder().encode(model) else { break }
+                self.multipeerHelper.sendToAllPeers(data)
             case .updateWaves(let value):
                 self.waveLabel.text = value
+                let model = CollaborativeSessionModel(key: CollaborativeSessionKeys.updateWaves.key, parameters: try? JSONEncoder().encode(value))
+                guard let data = try? JSONEncoder().encode(model) else { break }
+                self.multipeerHelper.sendToAllPeers(data)
             case .startMission: break
             case .showMissionCompleted:
                 let alert = UIAlertController(title: nil, message: "Mission Completed", preferredStyle: .alert)
@@ -187,9 +201,14 @@ class GameViewController: UIViewController {
     @objc
     func onTap(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: arView)
-        let entities = arView.entities(at: tapLocation)
+        let entities = arView.entities(at: tapLocation).compactMap({$0.synchronization?.identifier})
         if !entities.isEmpty {
-            gameViewModel.putTower(on: entities)
+            if gameViewModel.sessionType == .coop {
+                let model = CollaborativeSessionModel(key: CollaborativeSessionKeys.requestPlacingStatus.key, parameters: try? JSONEncoder().encode(entities.map({"\($0)"})))
+                guard let data = try? JSONEncoder().encode(model) else { return }
+                multipeerHelper.sendToAllPeers(data)
+            }
+            gameViewModel.checkPlacing(on: entities, source: .host)
         } else if canRayCast, let result = arView.raycast(
             from: tapLocation,
             allowing: .existingPlaneGeometry, alignment: .any
