@@ -11,7 +11,6 @@ import Combine
 class MenuViewModel {
     @Published var viewState: MenuViewState
     var config: GameConfig
-    var loadedModels = 0
 
     init() {
         viewState = .empty

@@ -20,8 +20,15 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_helper-test._tcp</string>
+		<string>_helper-test._udp</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This application synchronises with other iOS devices on the same network.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -47,13 +54,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>This application synchronises with other iOS devices on the same network.</string>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_helper-test._tcp</string>
-		<string>_helper-test._udp</string>
 	</array>
 </dict>
 </plist>

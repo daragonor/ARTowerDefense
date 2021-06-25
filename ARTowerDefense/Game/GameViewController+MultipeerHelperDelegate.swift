@@ -20,7 +20,8 @@ enum CollaborativeSessionKeys: String {
     case updateCoins
     case updateHP
     case updateWaves
-    
+    case sound
+    case finishMission
     //TODO
     case insertTower
     case upgradeTower
@@ -103,6 +104,18 @@ extension GameViewController: MultipeerHelperDelegate {
             DispatchQueue.main.async {
                 self.waveLabel.text = waves
             }
+        case .finishMission:
+            guard let params = decodedModel.parameters, let content = try? JSONDecoder().decode(String.self, from: params) else { return }
+            DispatchQueue.main.async {
+                let title = content.split(separator: "-").first ?? ""
+                let message = content.split(separator: "-").last ?? ""
+                self.gameViewModel.finishMission(title: String(title), message: String(message))
+            }
+        case .sound:
+            guard let params = decodedModel.parameters,
+                  let key = try? JSONDecoder().decode(String.self, from: params),
+                  let sound = AudioSource(rawValue: key) else { return }
+            AudioHandler.shared.playSound(sound)
         }
     }
     func setupMultipeerHelper() {

@@ -15,34 +15,8 @@ enum AudioSource: String, CaseIterable {
     }
 }
 
-//class SoundsHandler {
-//    static var shared = SoundsHandler()
-//    var player: AVAudioPlayer?
-//
-//    init() {
-//
-//    }
-//
-//    func playSound(_ type: AudioSource) {
-//        guard UserDefaults.standard.bool(forKey:SettingsPreferences.sound.key) else {return}
-//        guard let url = Bundle.main.url(forResource: type.key , withExtension: "wav") else {return}
-//
-//        do {
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-//            try AVAudioSession.sharedInstance().setActive(true)
-//
-//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-//
-//            guard let player = player else {return}
-//            player.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
-//}
-
-class SoundsHandler: NSObject, AVAudioPlayerDelegate {
-    static var shared = SoundsHandler()
+class AudioHandler: NSObject, AVAudioPlayerDelegate {
+    static var shared = AudioHandler()
 
     private override init() {}
 

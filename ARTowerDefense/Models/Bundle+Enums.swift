@@ -16,7 +16,7 @@ enum ModelType: String, CaseIterable {
         switch self {
         case .acidFloor: return 0.000125
         case .path: return 0.05
-        case .towerPlacing: return 0.000125
+        case .towerPlacing: return 0.0000248
         case .pathUpwards, .pathDownwards: return 0.0125
         case .here: return 0.0003
         case .bullet: return 0.002
@@ -36,7 +36,7 @@ enum CreepType: String, CaseIterable {
     
     var scalingFactor: Float {
         switch self {
-        case .flying: return 0.000007
+        case .flying: return 0.00001
         case .heavy: return 0.00002
         case .regular: return 0.00001
         case .small: return 0.00001

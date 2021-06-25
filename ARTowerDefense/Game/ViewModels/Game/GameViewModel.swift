@@ -306,6 +306,7 @@ extension GameViewModel {
             if graceTimer >= 0 {
                 self.viewState = .updateWaves("0:\(graceTimer < 10 ? "0" : "")\(graceTimer)")
                 if graceTimer == 0 {
+                    self.playSound(sound: .creep_spawn)
                     self.sendWaves(mission: mission, wave: self.waveCount)
                     self.waveCount += 1
                     self.viewState = .updateWaves( "\(self.waveCount)/\(self.config.missions[mission].waves.count)")
@@ -324,7 +325,7 @@ extension GameViewModel {
             let missionConfig = config.missions[mission]
             let paths = missionConfig.maps[spawn.map].creepPathsCoordinates(at: spawn.position,diameter: config.initialValues.gridDiameter)
             var count = 0
-            let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
                 guard count < missionConfig.waves[wave].count else { timer.invalidate() ; return }
                 let creepType = CreepType.allCases[missionConfig.waves[wave][count]]
                 let creepModelBundle: ModelBundle = self.templates[creepType.key]!.embeddedModel(at: spawn.model.transform.translation)
@@ -339,7 +340,6 @@ extension GameViewModel {
                 self.creeps[creep.model.id] = creep
                 creep.entity.playAnimation(creep.entity.availableAnimations[0].repeat())
                 count += 1
-                SoundsHandler.shared.playSound(AudioSource.creep_spawn)
                 self.deployUnit(creep, on: paths[self.waveCount % paths.count], setScale: 10)
             }
             timer.fire()
@@ -368,7 +368,7 @@ extension GameViewModel {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         creep.model.removeFromParent()
                     }
-                    SoundsHandler.shared.playSound(AudioSource.creep_finish)
+                    self.playSound(sound: .creep_finish)
                     self.creeps.removeValue(forKey: creep.model.id)
                     self.playerHp -= 1
                     self.viewState = .updateHP("\(self.playerHp)")
@@ -398,7 +398,8 @@ extension GameViewModel {
                         let pendingCreep = CreepBundle(bundle: creepModelBundle, hpBarId: hpBar.id, type: creepType, animation: nil)
                         self.creeps[pendingCreep.model.id] = pendingCreep
                         pendingCreep.entity.playAnimation(pendingCreep.entity.availableAnimations[0].repeat())
-                        SoundsHandler.shared.playSound(AudioSource.creep_spawn)
+                        self.playSound(sound: .creep_spawn)
+                        
                         self.deployUnit(pendingCreep, on: paths[self.waveCount % paths.count], setScale: 10)
                     }
                 case .hazard:
@@ -635,11 +636,28 @@ extension GameViewModel {
     }
     
     func checkMissionCompleted() {
-        if creeps.isEmpty, waveCount == config.missions[currentMission!].waves.count {
+        let creepsFinished = creeps.isEmpty && waveCount == config.missions[currentMission!].waves.count
+        let healthsUp = playerHp == 0
+        if  creepsFinished || healthsUp {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.viewState = .showMissionCompleted
+                var title = ""
+                var message = ""
+                if healthsUp {
+                    message = "Try again"
+                    title = "Mission Failed"
+                } else if creepsFinished {
+                    title = "Mission Completed"
+                    message = "Good job, on to the next challenge"
+                }
+
+                self.finishMission(title: title, message: message)
+                guard let data = try? JSONEncoder().encode("\(title)-\(message)") else { return }
+                self.viewState = .sendPeerData(collabKey: .finishMission, data: data)
             }
         }
+    }
+    func finishMission(title: String, message: String) {
+        viewState = .showMissionCompleted(title: title, message: message)
     }
 }
 
@@ -650,7 +668,7 @@ extension GameViewModel {
         let placingPosition = selectedPlacing.model.position
         coins -= towerType.cost(lvl: towerLvl)
         let towerModel: ModelBundle = templates[towerType.key(towerLvl)]!.embeddedModel(at: placingPosition)
-        SoundsHandler.shared.playSound(AudioSource.tower_building)
+        playSound(sound: .tower_building)
         placings.keys.forEach { id in
             if id == selectedPlacing.model.id {
                 placings[id]?.towerId = towerModel.model.id
@@ -863,7 +881,7 @@ extension GameViewModel {
         
         guard let creepBundle = creeps[creepModel.id], let (childIndex, child) = creepModel.children.enumerated().first(where: { $1.id == creeps[creepModel.id]?.hpBarId }) else { return }
         creeps[creepModel.id]?.hp -= attack
-        SoundsHandler.shared.playSound(audioType)
+        playSound(sound: audioType)
         if creepBundle.hp < 0 {
             handler()
         }
@@ -874,5 +892,10 @@ extension GameViewModel {
         hpBar.position = child.position
         child.removeFromParent()
         creeps[creepModel.id]?.hpBarId = hpBar.id
+    }
+    
+    func playSound(sound: AudioSource) {
+        viewState = .sendPeerData(collabKey: .sound, data: try? JSONEncoder().encode(sound.key))
+        AudioHandler.shared.playSound(sound)
     }
 }

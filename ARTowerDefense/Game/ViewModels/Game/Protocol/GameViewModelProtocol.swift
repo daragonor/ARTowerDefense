@@ -25,5 +25,5 @@ protocol GameViewModelProtocol {
     func upgradeTower(with towerType: TowerType, towerLvl: TowerLevel, from source: SessionType)
     func sellTower(with towerType: TowerType, towerLvl: TowerLevel, from source: SessionType)
     func rotateTower(clockwise: Bool, from source: SessionType) 
-
+    func finishMission(title:String, message: String)
 }

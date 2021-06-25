@@ -20,8 +20,7 @@ enum GameViewState {
     case loadAnchorConfiguration(_ connected: Bool)
     case showLoadingAssets
     case hideLoadingAssets
-    case showMissionCompleted
-    case startMission
+    case showMissionCompleted(title: String, message: String)
     case sendPeerData(collabKey: CollaborativeSessionKeys, data: Data?)
 }
 

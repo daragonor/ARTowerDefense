@@ -112,6 +112,7 @@ class GameViewController: UIViewController {
             switch viewState {
             case .empty: break
             case .returnToMenu(let networkStatus, let sessionType):
+                
                 self.menuViewModel.toMissions(connected: networkStatus, sessionType: sessionType)
             case .updateStrip(let context):
                 self.stripContext = context
@@ -159,16 +160,24 @@ class GameViewController: UIViewController {
                 let model = CollaborativeSessionModel(key: CollaborativeSessionKeys.updateWaves.key, parameters: try? JSONEncoder().encode(value))
                 guard let data = try? JSONEncoder().encode(model) else { break }
                 self.multipeerHelper.sendToAllPeers(data)
-            case .startMission: break
-            case .showMissionCompleted:
-                let alert = UIAlertController(title: nil, message: "Mission Completed", preferredStyle: .alert)
-                self.present(alert, animated: true) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: true) {
-                            self.gameViewModel.cleanValues()
-                        }
-                    }
-                }
+            case .showMissionCompleted(let title, let message):
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    self.gameViewModel.cleanValues()
+
+                  }))
+
+                self.present(alert, animated: true, completion: nil)
+                
+                
+//                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//                self.present(alert, animated: true) {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                        self.dismiss(animated: true) {
+//                        }
+//                    }
+//                }
             }
         }.store(in: &cancellables)
     }
