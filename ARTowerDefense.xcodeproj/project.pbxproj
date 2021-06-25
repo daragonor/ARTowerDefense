@@ -3,25 +3,259 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C131183264FDD910056ABE8 /* StripViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C131182264FDD910056ABE8 /* StripViewCell.swift */; };
+		7C1311FA265C4E860056ABE8 /* AudioHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1311F9265C4E860056ABE8 /* AudioHandler.swift */; };
+		7C13122A265C4EFC0056ABE8 /* lvl05_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */; };
+		7C13122B265C4EFC0056ABE8 /* lvl04_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */; };
+		7C13122C265C4EFC0056ABE8 /* lvl04_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */; };
+		7C13122D265C4EFC0056ABE8 /* lvl01_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */; };
+		7C13122E265C4EFC0056ABE8 /* lvl02_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */; };
+		7C13122F265C4EFC0056ABE8 /* lvl03_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */; };
+		7C131230265C4EFC0056ABE8 /* lvl06_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */; };
+		7C131231265C4EFC0056ABE8 /* lvl06_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */; };
+		7C131232265C4EFC0056ABE8 /* lvl03_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */; };
+		7C131233265C4EFC0056ABE8 /* lvl02_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */; };
+		7C131234265C4EFC0056ABE8 /* lvl01_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */; };
+		7C131235265C4EFC0056ABE8 /* lvl04_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */; };
+		7C131236265C4EFC0056ABE8 /* lvl05_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */; };
+		7C131237265C4EFC0056ABE8 /* lvl02_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */; };
+		7C131238265C4EFC0056ABE8 /* lvl03_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */; };
+		7C131239265C4EFC0056ABE8 /* lvl05_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */; };
+		7C13123A265C4EFC0056ABE8 /* lvl05_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */; };
+		7C13123B265C4EFC0056ABE8 /* lvl06_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */; };
+		7C13123C265C4EFC0056ABE8 /* lvl05_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */; };
+		7C13123D265C4EFC0056ABE8 /* lvl04_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */; };
+		7C13123E265C4EFC0056ABE8 /* lvl04_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */; };
+		7C13123F265C4EFC0056ABE8 /* lvl01_ground003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */; };
+		7C131240265C4EFC0056ABE8 /* lvl01_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */; };
+		7C131241265C4EFC0056ABE8 /* lvl04_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */; };
+		7C131242265C4EFC0056ABE8 /* lvl04_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */; };
+		7C131243265C4EFC0056ABE8 /* lvl05_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */; };
+		7C131244265C4EFC0056ABE8 /* lvl06_ground002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */; };
+		7C131245265C4EFC0056ABE8 /* lvl06_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */; };
+		7C131246265C4EFC0056ABE8 /* lvl06_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */; };
+		7C131247265C4EFC0056ABE8 /* lvl03_ground005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */; };
+		7C131248265C4EFC0056ABE8 /* lvl02_ground004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */; };
+		7C131249265C4EFC0056ABE8 /* lvl06_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */; };
+		7C13124A265C4EFC0056ABE8 /* lvl05_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */; };
+		7C13124B265C4EFC0056ABE8 /* lvl06_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */; };
+		7C13124C265C4EFC0056ABE8 /* lvl01_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */; };
+		7C13124D265C4EFC0056ABE8 /* lvl04_higherpath001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */; };
+		7C13124E265C4EFC0056ABE8 /* lvl04_higherbase001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */; };
+		7C13124F265C4EFC0056ABE8 /* lvl06_higherpath003.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */; };
+		7C131250265C4EFC0056ABE8 /* lvl05_higherpath002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */; };
+		7C131251265C4EFC0056ABE8 /* lvl05_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */; };
+		7C131252265C4EFC0056ABE8 /* lvl05_higherpath005.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */; };
+		7C131253265C4EFC0056ABE8 /* lvl06_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */; };
+		7C131254265C4EFC0056ABE8 /* lvl02_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */; };
+		7C131255265C4EFC0056ABE8 /* lvl03_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */; };
+		7C131256265C4EFC0056ABE8 /* lvl05_higherpath004.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */; };
+		7C131257265C4EFC0056ABE8 /* lvl04_ground001.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */; };
+		7C13125A265C4F010056ABE8 /* lvl00_neutral002.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */; };
+		7C131262265C4F870056ABE8 /* creep_spawn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125C265C4F870056ABE8 /* creep_spawn.wav */; };
+		7C131263265C4F870056ABE8 /* tower_building.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125D265C4F870056ABE8 /* tower_building.wav */; };
+		7C131264265C4F870056ABE8 /* bomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125E265C4F870056ABE8 /* bomb.wav */; };
+		7C131265265C4F870056ABE8 /* missile.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C13125F265C4F870056ABE8 /* missile.wav */; };
+		7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131260265C4F870056ABE8 /* creep_finish.wav */; };
+		7C131267265C4F870056ABE8 /* sword.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7C131261265C4F870056ABE8 /* sword.wav */; };
+		7C13126B265C52D40056ABE8 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13126A265C52D40056ABE8 /* FocusView.swift */; };
+		7C13126D265C84770056ABE8 /* acid_floor.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C13126C265C84770056ABE8 /* acid_floor.usdz */; };
+		7C192330266BFAC700827AFA /* small.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C19232F266BFAC700827AFA /* small.usdz */; };
+		7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */; };
+		7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */; };
+		7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */; };
+		7C8B4B522646C17D0073BCAE /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B4B502646C17D0073BCAE /* SettingsViewCell.swift */; };
+		7C8B4B532646C17D0073BCAE /* SettingsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B512646C17D0073BCAE /* SettingsViewCell.xib */; };
+		7C8B4B552646CB3E0073BCAE /* UserDefaults+Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B4B542646CB3E0073BCAE /* UserDefaults+Enum.swift */; };
+		7C8B4B782646E1A20073BCAE /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B4B772646E1A20073BCAE /* GameConfig.swift */; };
+		7C8B4B792647160B0073BCAE /* turret_lvl3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B692646D4040073BCAE /* turret_lvl3.usdz */; };
+		7C8B4B7A2647160F0073BCAE /* turret_lvl1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B5E2646D4040073BCAE /* turret_lvl1.usdz */; };
+		7C8B4B7B264716110073BCAE /* turret_lvl2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B6B2646D4040073BCAE /* turret_lvl2.usdz */; };
+		7C8B4B7C264716140073BCAE /* barracks_lvl1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B6A2646D4040073BCAE /* barracks_lvl1.usdz */; };
+		7C8B4B7D2647161A0073BCAE /* barracks_lvl3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B5F2646D4040073BCAE /* barracks_lvl3.usdz */; };
+		7C8B4B7E2647161A0073BCAE /* launcher_lvl1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B682646D4040073BCAE /* launcher_lvl1.usdz */; };
+		7C8B4B7F2647161A0073BCAE /* barracks_lvl2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B602646D4040073BCAE /* barracks_lvl2.usdz */; };
+		7C8B4B802647161A0073BCAE /* launcher_lvl3.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B622646D4040073BCAE /* launcher_lvl3.usdz */; };
+		7C8B4B812647161A0073BCAE /* launcher_lvl2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B612646D4040073BCAE /* launcher_lvl2.usdz */; };
+		7C8B4B822647162F0073BCAE /* bullet.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B652646D4040073BCAE /* bullet.usdz */; };
+		7C8B4B832647162F0073BCAE /* selectionRing.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B642646D4040073BCAE /* selectionRing.usdz */; };
+		7C8B4B842647162F0073BCAE /* flying_bomb.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B672646D4040073BCAE /* flying_bomb.usdz */; };
+		7C8B4B852647162F0073BCAE /* circle_effect.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B662646D4040073BCAE /* circle_effect.usdz */; };
+		7C8B4B86264716340073BCAE /* path.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B722646D4050073BCAE /* path.usdz */; };
+		7C8B4B87264716340073BCAE /* path_upwards.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B732646D4050073BCAE /* path_upwards.usdz */; };
+		7C8B4B88264716340073BCAE /* path_downwards.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B742646D4050073BCAE /* path_downwards.usdz */; };
+		7C8B4B892647163A0073BCAE /* goal.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B582646D4030073BCAE /* goal.usdz */; };
+		7C8B4B8A2647163A0073BCAE /* here.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B5B2646D4030073BCAE /* here.usdz */; };
+		7C8B4B8B2647163A0073BCAE /* spawn_port.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B5A2646D4030073BCAE /* spawn_port.usdz */; };
+		7C8B4B8C2647163A0073BCAE /* d.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B592646D4030073BCAE /* d.usdz */; };
+		7C8B4B8D2647163A0073BCAE /* hud_placing.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B5C2646D4030073BCAE /* hud_placing.usdz */; };
+		7C8B4B8E2647163F0073BCAE /* heavy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B6F2646D4050073BCAE /* heavy.usdz */; };
+		7C8B4B8F2647163F0073BCAE /* flying.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B702646D4050073BCAE /* flying.usdz */; };
+		7C8B4B912647163F0073BCAE /* regular.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7C8B4B6E2646D4050073BCAE /* regular.usdz */; };
+		7C8B4B93264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8B4B92264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift */; };
+		7C8B4B962649DD950073BCAE /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 7C8B4B952649DD950073BCAE /* FocusEntity */; };
 		7C8D5C03263D1F7C0016D837 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C02263D1F7C0016D837 /* AppDelegate.swift */; };
-		7C8D5C05263D1F7C0016D837 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C04263D1F7C0016D837 /* GameViewController.swift */; };
+		7C8D5C05263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C04263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift */; };
 		7C8D5C0A263D1F7C0016D837 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C8D5C08263D1F7C0016D837 /* Main.storyboard */; };
 		7C8D5C0C263D1F7F0016D837 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */; };
 		7C8D5C0F263D1F7F0016D837 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C8D5C0D263D1F7F0016D837 /* LaunchScreen.storyboard */; };
+		7C8D5C1C263D6DD90016D837 /* MultipeerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 7C8D5C1B263D6DD90016D837 /* MultipeerHelper */; };
+		7C8D5C1E263DA0080016D837 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C1D263DA0080016D837 /* MenuViewModel.swift */; };
+		7C8D5C2C263DA9020016D837 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C28263DA9020016D837 /* Utils.swift */; };
+		7C8D5C2D263DA9020016D837 /* Bundle+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C29263DA9020016D837 /* Bundle+Enums.swift */; };
+		7C8D5C2E263DA9020016D837 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C8D5C2A263DA9020016D837 /* config.json */; };
+		7C8D5C2F263DA9020016D837 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C2B263DA9020016D837 /* Map.swift */; };
+		7C8D5C30263DA9280016D837 /* ModelBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C1F263DA8DD0016D837 /* ModelBundle.swift */; };
+		7C8D5C31263DA92B0016D837 /* AmmoBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C24263DA8DD0016D837 /* AmmoBundle.swift */; };
+		7C8D5C32263DA92E0016D837 /* CreepBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C21263DA8DD0016D837 /* CreepBundle.swift */; };
+		7C8D5C33263DA9310016D837 /* PlacingBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C26263DA8DD0016D837 /* PlacingBundle.swift */; };
+		7C8D5C34263DA9340016D837 /* SpawnBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C23263DA8DD0016D837 /* SpawnBundle.swift */; };
+		7C8D5C35263DA9360016D837 /* TowerBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C20263DA8DD0016D837 /* TowerBundle.swift */; };
+		7C8D5C36263DA9390016D837 /* TroopBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C25263DA8DD0016D837 /* TroopBundle.swift */; };
+		7C8D5C37263DA93C0016D837 /* UnitBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C22263DA8DD0016D837 /* UnitBundle.swift */; };
+		7C8D5C3A263DB8330016D837 /* MenuViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C39263DB82A0016D837 /* MenuViewModelProtocol.swift */; };
+		7C8D5C3C263DC1D80016D837 /* MenuViewModel+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C3B263DC1D80016D837 /* MenuViewModel+Enums.swift */; };
+		7C8D5C3F263DD1080016D837 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C3E263DD1080016D837 /* GameViewController.swift */; };
+		7C8D5C43263DDE4F0016D837 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C42263DDE4F0016D837 /* CellProtocol.swift */; };
+		7C8D5C45263DDE7D0016D837 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C44263DDE7D0016D837 /* MenuTableViewCell.swift */; };
+		7C8D5C4B2640798C0016D837 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C4A2640798C0016D837 /* HeaderTableViewCell.swift */; };
+		7C8D5C522640AFC00016D837 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C4E2640AE690016D837 /* GameViewModel.swift */; };
+		7C8D5C532640AFC30016D837 /* GameViewModel+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C512640AEA00016D837 /* GameViewModel+Enums.swift */; };
+		7C8D5C542640AFC60016D837 /* GameViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C502640AEA00016D837 /* GameViewModelProtocol.swift */; };
+		7C8D5C592644697F0016D837 /* TowerEnciclopediaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C582644697F0016D837 /* TowerEnciclopediaViewCell.swift */; };
+		7C8D5C5B2644698F0016D837 /* CreepEnciclopediaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8D5C5A2644698F0016D837 /* CreepEnciclopediaViewCell.swift */; };
+		7C8D5C5D26462F720016D837 /* CreepEnciclopediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8D5C5C26462F720016D837 /* CreepEnciclopediaViewCell.xib */; };
+		7CDE5BD426805AD4007CDEB5 /* tower_placing.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7CDE5BD326805AD4007CDEB5 /* tower_placing.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C131182264FDD910056ABE8 /* StripViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripViewCell.swift; sourceTree = "<group>"; };
+		7C1311F9265C4E860056ABE8 /* AudioHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioHandler.swift; sourceTree = "<group>"; };
+		7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground003.usdz; sourceTree = "<group>"; };
+		7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath004.usdz; sourceTree = "<group>"; };
+		7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground002.usdz; sourceTree = "<group>"; };
+		7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground005.usdz; sourceTree = "<group>"; };
+		7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground003.usdz; sourceTree = "<group>"; };
+		7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground002.usdz; sourceTree = "<group>"; };
+		7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground005.usdz; sourceTree = "<group>"; };
+		7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground004.usdz; sourceTree = "<group>"; };
+		7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground003.usdz; sourceTree = "<group>"; };
+		7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground002.usdz; sourceTree = "<group>"; };
+		7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground004.usdz; sourceTree = "<group>"; };
+		7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground003.usdz; sourceTree = "<group>"; };
+		7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground002.usdz; sourceTree = "<group>"; };
+		7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground005.usdz; sourceTree = "<group>"; };
+		7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground004.usdz; sourceTree = "<group>"; };
+		7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath001.usdz; sourceTree = "<group>"; };
+		7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherbase001.usdz; sourceTree = "<group>"; };
+		7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground003.usdz; sourceTree = "<group>"; };
+		7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground005.usdz; sourceTree = "<group>"; };
+		7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath002.usdz; sourceTree = "<group>"; };
+		7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground004.usdz; sourceTree = "<group>"; };
+		7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground003.usdz; sourceTree = "<group>"; };
+		7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground002.usdz; sourceTree = "<group>"; };
+		7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground005.usdz; sourceTree = "<group>"; };
+		7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath003.usdz; sourceTree = "<group>"; };
+		7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground004.usdz; sourceTree = "<group>"; };
+		7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground002.usdz; sourceTree = "<group>"; };
+		7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherbase001.usdz; sourceTree = "<group>"; };
+		7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath001.usdz; sourceTree = "<group>"; };
+		7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground005.usdz; sourceTree = "<group>"; };
+		7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground004.usdz; sourceTree = "<group>"; };
+		7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_ground001.usdz; sourceTree = "<group>"; };
+		7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath003.usdz; sourceTree = "<group>"; };
+		7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath002.usdz; sourceTree = "<group>"; };
+		7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl01_ground001.usdz; sourceTree = "<group>"; };
+		7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherpath001.usdz; sourceTree = "<group>"; };
+		7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_higherbase001.usdz; sourceTree = "<group>"; };
+		7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath003.usdz; sourceTree = "<group>"; };
+		7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath002.usdz; sourceTree = "<group>"; };
+		7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_ground001.usdz; sourceTree = "<group>"; };
+		7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath005.usdz; sourceTree = "<group>"; };
+		7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl06_higherpath004.usdz; sourceTree = "<group>"; };
+		7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl02_ground001.usdz; sourceTree = "<group>"; };
+		7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl03_ground001.usdz; sourceTree = "<group>"; };
+		7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl05_higherpath004.usdz; sourceTree = "<group>"; };
+		7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl04_ground001.usdz; sourceTree = "<group>"; };
+		7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = lvl00_neutral002.usdz; sourceTree = "<group>"; };
+		7C13125C265C4F870056ABE8 /* creep_spawn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_spawn.wav; sourceTree = "<group>"; };
+		7C13125D265C4F870056ABE8 /* tower_building.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tower_building.wav; sourceTree = "<group>"; };
+		7C13125E265C4F870056ABE8 /* bomb.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bomb.wav; sourceTree = "<group>"; };
+		7C13125F265C4F870056ABE8 /* missile.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = missile.wav; sourceTree = "<group>"; };
+		7C131260265C4F870056ABE8 /* creep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creep_finish.wav; sourceTree = "<group>"; };
+		7C131261265C4F870056ABE8 /* sword.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sword.wav; sourceTree = "<group>"; };
+		7C13126A265C52D40056ABE8 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		7C13126C265C84770056ABE8 /* acid_floor.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = acid_floor.usdz; sourceTree = "<group>"; };
+		7C19232F266BFAC700827AFA /* small.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = small.usdz; sourceTree = "<group>"; };
+		7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TowerEnciclopediaViewCell.xib; sourceTree = "<group>"; };
+		7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
+		7C8B4B502646C17D0073BCAE /* SettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
+		7C8B4B512646C17D0073BCAE /* SettingsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewCell.xib; sourceTree = "<group>"; };
+		7C8B4B542646CB3E0073BCAE /* UserDefaults+Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Enum.swift"; sourceTree = "<group>"; };
+		7C8B4B582646D4030073BCAE /* goal.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = goal.usdz; sourceTree = "<group>"; };
+		7C8B4B592646D4030073BCAE /* d.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = d.usdz; sourceTree = "<group>"; };
+		7C8B4B5A2646D4030073BCAE /* spawn_port.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = spawn_port.usdz; sourceTree = "<group>"; };
+		7C8B4B5B2646D4030073BCAE /* here.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = here.usdz; sourceTree = "<group>"; };
+		7C8B4B5C2646D4030073BCAE /* hud_placing.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = hud_placing.usdz; sourceTree = "<group>"; };
+		7C8B4B5E2646D4040073BCAE /* turret_lvl1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = turret_lvl1.usdz; sourceTree = "<group>"; };
+		7C8B4B5F2646D4040073BCAE /* barracks_lvl3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = barracks_lvl3.usdz; sourceTree = "<group>"; };
+		7C8B4B602646D4040073BCAE /* barracks_lvl2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = barracks_lvl2.usdz; sourceTree = "<group>"; };
+		7C8B4B612646D4040073BCAE /* launcher_lvl2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = launcher_lvl2.usdz; sourceTree = "<group>"; };
+		7C8B4B622646D4040073BCAE /* launcher_lvl3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = launcher_lvl3.usdz; sourceTree = "<group>"; };
+		7C8B4B642646D4040073BCAE /* selectionRing.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = selectionRing.usdz; sourceTree = "<group>"; };
+		7C8B4B652646D4040073BCAE /* bullet.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = bullet.usdz; sourceTree = "<group>"; };
+		7C8B4B662646D4040073BCAE /* circle_effect.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = circle_effect.usdz; sourceTree = "<group>"; };
+		7C8B4B672646D4040073BCAE /* flying_bomb.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = flying_bomb.usdz; sourceTree = "<group>"; };
+		7C8B4B682646D4040073BCAE /* launcher_lvl1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = launcher_lvl1.usdz; sourceTree = "<group>"; };
+		7C8B4B692646D4040073BCAE /* turret_lvl3.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = turret_lvl3.usdz; sourceTree = "<group>"; };
+		7C8B4B6A2646D4040073BCAE /* barracks_lvl1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = barracks_lvl1.usdz; sourceTree = "<group>"; };
+		7C8B4B6B2646D4040073BCAE /* turret_lvl2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = turret_lvl2.usdz; sourceTree = "<group>"; };
+		7C8B4B6E2646D4050073BCAE /* regular.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = regular.usdz; sourceTree = "<group>"; };
+		7C8B4B6F2646D4050073BCAE /* heavy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = heavy.usdz; sourceTree = "<group>"; };
+		7C8B4B702646D4050073BCAE /* flying.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = flying.usdz; sourceTree = "<group>"; };
+		7C8B4B722646D4050073BCAE /* path.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = path.usdz; sourceTree = "<group>"; };
+		7C8B4B732646D4050073BCAE /* path_upwards.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = path_upwards.usdz; sourceTree = "<group>"; };
+		7C8B4B742646D4050073BCAE /* path_downwards.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = path_downwards.usdz; sourceTree = "<group>"; };
+		7C8B4B772646E1A20073BCAE /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
+		7C8B4B92264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+MultipeerHelperDelegate.swift"; sourceTree = "<group>"; };
 		7C8D5BFF263D1F7C0016D837 /* ARTowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8D5C02263D1F7C0016D837 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7C8D5C04263D1F7C0016D837 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		7C8D5C04263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+TableViewDataSourceDelegate.swift"; sourceTree = "<group>"; };
 		7C8D5C09263D1F7C0016D837 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C8D5C0E263D1F7F0016D837 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C8D5C10263D1F7F0016D837 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C8D5C1D263DA0080016D837 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		7C8D5C1F263DA8DD0016D837 /* ModelBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBundle.swift; sourceTree = "<group>"; };
+		7C8D5C20263DA8DD0016D837 /* TowerBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerBundle.swift; sourceTree = "<group>"; };
+		7C8D5C21263DA8DD0016D837 /* CreepBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreepBundle.swift; sourceTree = "<group>"; };
+		7C8D5C22263DA8DD0016D837 /* UnitBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitBundle.swift; sourceTree = "<group>"; };
+		7C8D5C23263DA8DD0016D837 /* SpawnBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnBundle.swift; sourceTree = "<group>"; };
+		7C8D5C24263DA8DD0016D837 /* AmmoBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmmoBundle.swift; sourceTree = "<group>"; };
+		7C8D5C25263DA8DD0016D837 /* TroopBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroopBundle.swift; sourceTree = "<group>"; };
+		7C8D5C26263DA8DD0016D837 /* PlacingBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacingBundle.swift; sourceTree = "<group>"; };
+		7C8D5C28263DA9020016D837 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7C8D5C29263DA9020016D837 /* Bundle+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Enums.swift"; sourceTree = "<group>"; };
+		7C8D5C2A263DA9020016D837 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		7C8D5C2B263DA9020016D837 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		7C8D5C39263DB82A0016D837 /* MenuViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelProtocol.swift; sourceTree = "<group>"; };
+		7C8D5C3B263DC1D80016D837 /* MenuViewModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewModel+Enums.swift"; sourceTree = "<group>"; };
+		7C8D5C3E263DD1080016D837 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		7C8D5C42263DDE4F0016D837 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
+		7C8D5C44263DDE7D0016D837 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		7C8D5C4A2640798C0016D837 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		7C8D5C4E2640AE690016D837 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		7C8D5C502640AEA00016D837 /* GameViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelProtocol.swift; sourceTree = "<group>"; };
+		7C8D5C512640AEA00016D837 /* GameViewModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Enums.swift"; sourceTree = "<group>"; };
+		7C8D5C582644697F0016D837 /* TowerEnciclopediaViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TowerEnciclopediaViewCell.swift; path = ARTowerDefense/Game/Cells/TowerEnciclopedia/TowerEnciclopediaViewCell.swift; sourceTree = SOURCE_ROOT; };
+		7C8D5C5A2644698F0016D837 /* CreepEnciclopediaViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreepEnciclopediaViewCell.swift; sourceTree = "<group>"; };
+		7C8D5C5C26462F720016D837 /* CreepEnciclopediaViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreepEnciclopediaViewCell.xib; sourceTree = "<group>"; };
+		7CDE5BD326805AD4007CDEB5 /* tower_placing.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = tower_placing.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +263,199 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C8B4B962649DD950073BCAE /* FocusEntity in Frameworks */,
+				7C8D5C1C263D6DD90016D837 /* MultipeerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C131181264FDD6F0056ABE8 /* Strip */ = {
+			isa = PBXGroup;
+			children = (
+				7C131182264FDD910056ABE8 /* StripViewCell.swift */,
+			);
+			path = Strip;
+			sourceTree = "<group>";
+		};
+		7C1311FB265C4EFB0056ABE8 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				7C1311FC265C4EFB0056ABE8 /* lvl05_ground003.usdz */,
+				7C1311FD265C4EFB0056ABE8 /* lvl04_higherpath004.usdz */,
+				7C1311FE265C4EFB0056ABE8 /* lvl04_ground002.usdz */,
+				7C1311FF265C4EFB0056ABE8 /* lvl01_ground005.usdz */,
+				7C131200265C4EFB0056ABE8 /* lvl02_ground003.usdz */,
+				7C131201265C4EFB0056ABE8 /* lvl03_ground002.usdz */,
+				7C131202265C4EFB0056ABE8 /* lvl06_ground005.usdz */,
+				7C131203265C4EFB0056ABE8 /* lvl06_ground004.usdz */,
+				7C131204265C4EFB0056ABE8 /* lvl03_ground003.usdz */,
+				7C131205265C4EFB0056ABE8 /* lvl02_ground002.usdz */,
+				7C131206265C4EFB0056ABE8 /* lvl01_ground004.usdz */,
+				7C131207265C4EFB0056ABE8 /* lvl04_ground003.usdz */,
+				7C131208265C4EFB0056ABE8 /* lvl05_ground002.usdz */,
+				7C131209265C4EFB0056ABE8 /* lvl02_ground005.usdz */,
+				7C13120A265C4EFB0056ABE8 /* lvl03_ground004.usdz */,
+				7C13120B265C4EFB0056ABE8 /* lvl05_higherpath001.usdz */,
+				7C13120C265C4EFB0056ABE8 /* lvl05_higherbase001.usdz */,
+				7C13120D265C4EFB0056ABE8 /* lvl06_ground003.usdz */,
+				7C13120E265C4EFB0056ABE8 /* lvl05_ground005.usdz */,
+				7C13120F265C4EFB0056ABE8 /* lvl04_higherpath002.usdz */,
+				7C131210265C4EFB0056ABE8 /* lvl04_ground004.usdz */,
+				7C131211265C4EFB0056ABE8 /* lvl01_ground003.usdz */,
+				7C131212265C4EFB0056ABE8 /* lvl01_ground002.usdz */,
+				7C131213265C4EFB0056ABE8 /* lvl04_ground005.usdz */,
+				7C131214265C4EFB0056ABE8 /* lvl04_higherpath003.usdz */,
+				7C131215265C4EFB0056ABE8 /* lvl05_ground004.usdz */,
+				7C131216265C4EFB0056ABE8 /* lvl06_ground002.usdz */,
+				7C131217265C4EFB0056ABE8 /* lvl06_higherbase001.usdz */,
+				7C131218265C4EFB0056ABE8 /* lvl06_higherpath001.usdz */,
+				7C131219265C4EFB0056ABE8 /* lvl03_ground005.usdz */,
+				7C13121A265C4EFB0056ABE8 /* lvl02_ground004.usdz */,
+				7C13121B265C4EFB0056ABE8 /* lvl06_ground001.usdz */,
+				7C13121C265C4EFB0056ABE8 /* lvl05_higherpath003.usdz */,
+				7C13121D265C4EFB0056ABE8 /* lvl06_higherpath002.usdz */,
+				7C13121E265C4EFB0056ABE8 /* lvl01_ground001.usdz */,
+				7C13121F265C4EFB0056ABE8 /* lvl04_higherpath001.usdz */,
+				7C131220265C4EFB0056ABE8 /* lvl04_higherbase001.usdz */,
+				7C131221265C4EFB0056ABE8 /* lvl06_higherpath003.usdz */,
+				7C131222265C4EFB0056ABE8 /* lvl05_higherpath002.usdz */,
+				7C131223265C4EFB0056ABE8 /* lvl05_ground001.usdz */,
+				7C131224265C4EFB0056ABE8 /* lvl05_higherpath005.usdz */,
+				7C131225265C4EFB0056ABE8 /* lvl06_higherpath004.usdz */,
+				7C131226265C4EFB0056ABE8 /* lvl02_ground001.usdz */,
+				7C131227265C4EFC0056ABE8 /* lvl03_ground001.usdz */,
+				7C131228265C4EFC0056ABE8 /* lvl05_higherpath004.usdz */,
+				7C131229265C4EFC0056ABE8 /* lvl04_ground001.usdz */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		7C131258265C4F010056ABE8 /* Neutral */ = {
+			isa = PBXGroup;
+			children = (
+				7C131259265C4F010056ABE8 /* lvl00_neutral002.usdz */,
+			);
+			path = Neutral;
+			sourceTree = "<group>";
+		};
+		7C13125B265C4F870056ABE8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7C13125C265C4F870056ABE8 /* creep_spawn.wav */,
+				7C13125D265C4F870056ABE8 /* tower_building.wav */,
+				7C13125E265C4F870056ABE8 /* bomb.wav */,
+				7C13125F265C4F870056ABE8 /* missile.wav */,
+				7C131260265C4F870056ABE8 /* creep_finish.wav */,
+				7C131261265C4F870056ABE8 /* sword.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		7C131268265C52570056ABE8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */,
+				7C13125B265C4F870056ABE8 /* Sounds */,
+				7C8B4B562646D3E20073BCAE /* 3DModels */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		7C131269265C52AC0056ABE8 /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				7C13126A265C52D40056ABE8 /* FocusView.swift */,
+			);
+			path = Focus;
+			sourceTree = "<group>";
+		};
+		7C8B4B4F2646C1650073BCAE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7C8B4B502646C17D0073BCAE /* SettingsViewCell.swift */,
+				7C8B4B512646C17D0073BCAE /* SettingsViewCell.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7C8B4B562646D3E20073BCAE /* 3DModels */ = {
+			isa = PBXGroup;
+			children = (
+				7C131258265C4F010056ABE8 /* Neutral */,
+				7C1311FB265C4EFB0056ABE8 /* Levels */,
+				7C8B4B6C2646D4050073BCAE /* Creeps */,
+				7C8B4B572646D4030073BCAE /* Map */,
+				7C8B4B712646D4050073BCAE /* Paths */,
+				7C8B4B5D2646D4040073BCAE /* Towers */,
+			);
+			path = 3DModels;
+			sourceTree = "<group>";
+		};
+		7C8B4B572646D4030073BCAE /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7CDE5BD326805AD4007CDEB5 /* tower_placing.usdz */,
+				7C8B4B582646D4030073BCAE /* goal.usdz */,
+				7C8B4B592646D4030073BCAE /* d.usdz */,
+				7C8B4B5A2646D4030073BCAE /* spawn_port.usdz */,
+				7C8B4B5B2646D4030073BCAE /* here.usdz */,
+				7C8B4B5C2646D4030073BCAE /* hud_placing.usdz */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		7C8B4B5D2646D4040073BCAE /* Towers */ = {
+			isa = PBXGroup;
+			children = (
+				7C8B4B632646D4040073BCAE /* accesories */,
+				7C8B4B5E2646D4040073BCAE /* turret_lvl1.usdz */,
+				7C8B4B6B2646D4040073BCAE /* turret_lvl2.usdz */,
+				7C8B4B692646D4040073BCAE /* turret_lvl3.usdz */,
+				7C8B4B6A2646D4040073BCAE /* barracks_lvl1.usdz */,
+				7C8B4B602646D4040073BCAE /* barracks_lvl2.usdz */,
+				7C8B4B5F2646D4040073BCAE /* barracks_lvl3.usdz */,
+				7C8B4B682646D4040073BCAE /* launcher_lvl1.usdz */,
+				7C8B4B612646D4040073BCAE /* launcher_lvl2.usdz */,
+				7C8B4B622646D4040073BCAE /* launcher_lvl3.usdz */,
+			);
+			path = Towers;
+			sourceTree = "<group>";
+		};
+		7C8B4B632646D4040073BCAE /* accesories */ = {
+			isa = PBXGroup;
+			children = (
+				7C8B4B642646D4040073BCAE /* selectionRing.usdz */,
+				7C8B4B652646D4040073BCAE /* bullet.usdz */,
+				7C8B4B662646D4040073BCAE /* circle_effect.usdz */,
+				7C8B4B672646D4040073BCAE /* flying_bomb.usdz */,
+			);
+			path = accesories;
+			sourceTree = "<group>";
+		};
+		7C8B4B6C2646D4050073BCAE /* Creeps */ = {
+			isa = PBXGroup;
+			children = (
+				7C19232F266BFAC700827AFA /* small.usdz */,
+				7C8B4B6E2646D4050073BCAE /* regular.usdz */,
+				7C8B4B6F2646D4050073BCAE /* heavy.usdz */,
+				7C8B4B702646D4050073BCAE /* flying.usdz */,
+			);
+			path = Creeps;
+			sourceTree = "<group>";
+		};
+		7C8B4B712646D4050073BCAE /* Paths */ = {
+			isa = PBXGroup;
+			children = (
+				7C13126C265C84770056ABE8 /* acid_floor.usdz */,
+				7C8B4B722646D4050073BCAE /* path.usdz */,
+				7C8B4B732646D4050073BCAE /* path_upwards.usdz */,
+				7C8B4B742646D4050073BCAE /* path_downwards.usdz */,
+			);
+			path = Paths;
+			sourceTree = "<group>";
+		};
 		7C8D5BF6263D1F7C0016D837 = {
 			isa = PBXGroup;
 			children = (
@@ -54,46 +475,161 @@
 		7C8D5C01263D1F7C0016D837 /* ARTowerDefense */ = {
 			isa = PBXGroup;
 			children = (
+				7C131268265C52570056ABE8 /* Assets */,
+				7C8D5C16263D461B0016D837 /* Models */,
+				7C8D5C27263DA8EB0016D837 /* Utils */,
 				7C8D5C18263D46340016D837 /* Game */,
-				7C8D5C17263D46270016D837 /* Network */,
-				7C8D5C16263D461B0016D837 /* Model */,
 				7C8D5C02263D1F7C0016D837 /* AppDelegate.swift */,
-				7C8D5C08263D1F7C0016D837 /* Main.storyboard */,
-				7C8D5C0B263D1F7F0016D837 /* Assets.xcassets */,
 				7C8D5C0D263D1F7F0016D837 /* LaunchScreen.storyboard */,
 				7C8D5C10263D1F7F0016D837 /* Info.plist */,
 			);
 			path = ARTowerDefense;
 			sourceTree = "<group>";
 		};
-		7C8D5C16263D461B0016D837 /* Model */ = {
+		7C8D5C16263D461B0016D837 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7C8D5C1F263DA8DD0016D837 /* ModelBundle.swift */,
+				7C8D5C24263DA8DD0016D837 /* AmmoBundle.swift */,
+				7C8D5C21263DA8DD0016D837 /* CreepBundle.swift */,
+				7C8D5C26263DA8DD0016D837 /* PlacingBundle.swift */,
+				7C8D5C23263DA8DD0016D837 /* SpawnBundle.swift */,
+				7C8D5C20263DA8DD0016D837 /* TowerBundle.swift */,
+				7C8D5C25263DA8DD0016D837 /* TroopBundle.swift */,
+				7C8D5C22263DA8DD0016D837 /* UnitBundle.swift */,
+				7C8D5C29263DA9020016D837 /* Bundle+Enums.swift */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		7C8D5C17263D46270016D837 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7C8D5C18263D46340016D837 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				7C8D5C19263D50230016D837 /* ViewModel */,
-				7C8D5C04263D1F7C0016D837 /* GameViewController.swift */,
+				7C8D5C40263DDE3A0016D837 /* Cells */,
+				7C8D5C19263D50230016D837 /* ViewModels */,
+				7C8D5C3E263DD1080016D837 /* GameViewController.swift */,
+				7C8D5C04263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift */,
+				7C8B4B92264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift */,
+				7C8D5C08263D1F7C0016D837 /* Main.storyboard */,
 			);
 			path = Game;
 			sourceTree = "<group>";
 		};
-		7C8D5C19263D50230016D837 /* ViewModel */ = {
+		7C8D5C19263D50230016D837 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7C8D5C4D26407C770016D837 /* Game */,
+				7C8D5C4C26407C700016D837 /* Menu */,
 			);
-			path = ViewModel;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7C8D5C27263DA8EB0016D837 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7C131269265C52AC0056ABE8 /* Focus */,
+				7C8D5C2A263DA9020016D837 /* config.json */,
+				7C8B4B772646E1A20073BCAE /* GameConfig.swift */,
+				7C8D5C2B263DA9020016D837 /* Map.swift */,
+				7C8D5C28263DA9020016D837 /* Utils.swift */,
+				7C8B4B542646CB3E0073BCAE /* UserDefaults+Enum.swift */,
+				7C1311F9265C4E860056ABE8 /* AudioHandler.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7C8D5C38263DB81F0016D837 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C39263DB82A0016D837 /* MenuViewModelProtocol.swift */,
+				7C8D5C3B263DC1D80016D837 /* MenuViewModel+Enums.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		7C8D5C40263DDE3A0016D837 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7C131181264FDD6F0056ABE8 /* Strip */,
+				7C8D5C41263DDE3E0016D837 /* Protocol */,
+				7C8B4B4F2646C1650073BCAE /* Settings */,
+				7C8D5C57264461250016D837 /* CreepEnciclopedia */,
+				7C8D5C56264461170016D837 /* TowerEnciclopedia */,
+				7C8D5C46263DDE8D0016D837 /* Menu */,
+				7C8D5C47263DE1500016D837 /* Header */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7C8D5C41263DDE3E0016D837 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C42263DDE4F0016D837 /* CellProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		7C8D5C46263DDE8D0016D837 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C44263DDE7D0016D837 /* MenuTableViewCell.swift */,
+				7C8B4B4B2646C0FF0073BCAE /* MenuTableViewCell.xib */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		7C8D5C47263DE1500016D837 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C4A2640798C0016D837 /* HeaderTableViewCell.swift */,
+				7C8B4B4D2646C1270073BCAE /* HeaderTableViewCell.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		7C8D5C4C26407C700016D837 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C38263DB81F0016D837 /* Protocol */,
+				7C8D5C1D263DA0080016D837 /* MenuViewModel.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		7C8D5C4D26407C770016D837 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C4F2640AEA00016D837 /* Protocol */,
+				7C8D5C4E2640AE690016D837 /* GameViewModel.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		7C8D5C4F2640AEA00016D837 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C502640AEA00016D837 /* GameViewModelProtocol.swift */,
+				7C8D5C512640AEA00016D837 /* GameViewModel+Enums.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		7C8D5C56264461170016D837 /* TowerEnciclopedia */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C582644697F0016D837 /* TowerEnciclopediaViewCell.swift */,
+				7C8B4B492646C0770073BCAE /* TowerEnciclopediaViewCell.xib */,
+			);
+			path = TowerEnciclopedia;
+			sourceTree = "<group>";
+		};
+		7C8D5C57264461250016D837 /* CreepEnciclopedia */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D5C5A2644698F0016D837 /* CreepEnciclopediaViewCell.swift */,
+				7C8D5C5C26462F720016D837 /* CreepEnciclopediaViewCell.xib */,
+			);
+			path = CreepEnciclopedia;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +648,10 @@
 			dependencies = (
 			);
 			name = ARTowerDefense;
+			packageProductDependencies = (
+				7C8D5C1B263D6DD90016D837 /* MultipeerHelper */,
+				7C8B4B952649DD950073BCAE /* FocusEntity */,
+			);
 			productName = ARTowerDefense;
 			productReference = 7C8D5BFF263D1F7C0016D837 /* ARTowerDefense.app */;
 			productType = "com.apple.product-type.application";
@@ -139,6 +679,10 @@
 				Base,
 			);
 			mainGroup = 7C8D5BF6263D1F7C0016D837;
+			packageReferences = (
+				7C8D5C1A263D6DD90016D837 /* XCRemoteSwiftPackageReference "MultipeerHelper" */,
+				7C8B4B942649DD940073BCAE /* XCRemoteSwiftPackageReference "FocusEntity" */,
+			);
 			productRefGroup = 7C8D5C00263D1F7C0016D837 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -154,8 +698,94 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C8D5C0F263D1F7F0016D837 /* LaunchScreen.storyboard in Resources */,
+				7C8B4B8A2647163A0073BCAE /* here.usdz in Resources */,
+				7C8B4B532646C17D0073BCAE /* SettingsViewCell.xib in Resources */,
+				7C131251265C4EFC0056ABE8 /* lvl05_ground001.usdz in Resources */,
+				7C13126D265C84770056ABE8 /* acid_floor.usdz in Resources */,
+				7C8B4B4C2646C0FF0073BCAE /* MenuTableViewCell.xib in Resources */,
+				7C8B4B7E2647161A0073BCAE /* launcher_lvl1.usdz in Resources */,
+				7C131267265C4F870056ABE8 /* sword.wav in Resources */,
+				7C13123A265C4EFC0056ABE8 /* lvl05_higherbase001.usdz in Resources */,
+				7C8B4B8E2647163F0073BCAE /* heavy.usdz in Resources */,
+				7C131257265C4EFC0056ABE8 /* lvl04_ground001.usdz in Resources */,
+				7C131235265C4EFC0056ABE8 /* lvl04_ground003.usdz in Resources */,
+				7C131238265C4EFC0056ABE8 /* lvl03_ground004.usdz in Resources */,
+				7C131253265C4EFC0056ABE8 /* lvl06_higherpath004.usdz in Resources */,
+				7C8D5C5D26462F720016D837 /* CreepEnciclopediaViewCell.xib in Resources */,
+				7C131249265C4EFC0056ABE8 /* lvl06_ground001.usdz in Resources */,
+				7C8B4B7A2647160F0073BCAE /* turret_lvl1.usdz in Resources */,
+				7C8B4B8F2647163F0073BCAE /* flying.usdz in Resources */,
+				7C131231265C4EFC0056ABE8 /* lvl06_ground004.usdz in Resources */,
+				7C13124A265C4EFC0056ABE8 /* lvl05_higherpath003.usdz in Resources */,
+				7C8B4B822647162F0073BCAE /* bullet.usdz in Resources */,
+				7C8B4B8B2647163A0073BCAE /* spawn_port.usdz in Resources */,
+				7C131255265C4EFC0056ABE8 /* lvl03_ground001.usdz in Resources */,
+				7C131250265C4EFC0056ABE8 /* lvl05_higherpath002.usdz in Resources */,
+				7C131266265C4F870056ABE8 /* creep_finish.wav in Resources */,
+				7C8B4B87264716340073BCAE /* path_upwards.usdz in Resources */,
+				7C8B4B842647162F0073BCAE /* flying_bomb.usdz in Resources */,
+				7C131252265C4EFC0056ABE8 /* lvl05_higherpath005.usdz in Resources */,
+				7C13124D265C4EFC0056ABE8 /* lvl04_higherpath001.usdz in Resources */,
+				7C131239265C4EFC0056ABE8 /* lvl05_higherpath001.usdz in Resources */,
+				7C8B4B7C264716140073BCAE /* barracks_lvl1.usdz in Resources */,
+				7C13122C265C4EFC0056ABE8 /* lvl04_ground002.usdz in Resources */,
+				7C131263265C4F870056ABE8 /* tower_building.wav in Resources */,
+				7C131243265C4EFC0056ABE8 /* lvl05_ground004.usdz in Resources */,
+				7C8B4B8D2647163A0073BCAE /* hud_placing.usdz in Resources */,
+				7C13122F265C4EFC0056ABE8 /* lvl03_ground002.usdz in Resources */,
+				7C8B4B832647162F0073BCAE /* selectionRing.usdz in Resources */,
+				7C131233265C4EFC0056ABE8 /* lvl02_ground002.usdz in Resources */,
+				7C131245265C4EFC0056ABE8 /* lvl06_higherbase001.usdz in Resources */,
+				7C8B4B792647160B0073BCAE /* turret_lvl3.usdz in Resources */,
+				7C8B4B892647163A0073BCAE /* goal.usdz in Resources */,
+				7C8B4B8C2647163A0073BCAE /* d.usdz in Resources */,
+				7C8D5C2E263DA9020016D837 /* config.json in Resources */,
+				7C13123D265C4EFC0056ABE8 /* lvl04_higherpath002.usdz in Resources */,
+				7C131236265C4EFC0056ABE8 /* lvl05_ground002.usdz in Resources */,
+				7C131237265C4EFC0056ABE8 /* lvl02_ground005.usdz in Resources */,
+				7C13122A265C4EFC0056ABE8 /* lvl05_ground003.usdz in Resources */,
+				7C13124F265C4EFC0056ABE8 /* lvl06_higherpath003.usdz in Resources */,
+				7C13125A265C4F010056ABE8 /* lvl00_neutral002.usdz in Resources */,
+				7C131248265C4EFC0056ABE8 /* lvl02_ground004.usdz in Resources */,
+				7C13124C265C4EFC0056ABE8 /* lvl01_ground001.usdz in Resources */,
+				7C131262265C4F870056ABE8 /* creep_spawn.wav in Resources */,
+				7C8B4B4E2646C1270073BCAE /* HeaderTableViewCell.xib in Resources */,
+				7C13123E265C4EFC0056ABE8 /* lvl04_ground004.usdz in Resources */,
+				7C13122E265C4EFC0056ABE8 /* lvl02_ground003.usdz in Resources */,
+				7C131246265C4EFC0056ABE8 /* lvl06_higherpath001.usdz in Resources */,
+				7C8B4B912647163F0073BCAE /* regular.usdz in Resources */,
+				7C131234265C4EFC0056ABE8 /* lvl01_ground004.usdz in Resources */,
 				7C8D5C0C263D1F7F0016D837 /* Assets.xcassets in Resources */,
+				7C8B4B7B264716110073BCAE /* turret_lvl2.usdz in Resources */,
+				7C192330266BFAC700827AFA /* small.usdz in Resources */,
+				7C8B4B4A2646C0770073BCAE /* TowerEnciclopediaViewCell.xib in Resources */,
+				7C8B4B86264716340073BCAE /* path.usdz in Resources */,
+				7C8B4B812647161A0073BCAE /* launcher_lvl2.usdz in Resources */,
+				7C13124E265C4EFC0056ABE8 /* lvl04_higherbase001.usdz in Resources */,
+				7C13123B265C4EFC0056ABE8 /* lvl06_ground003.usdz in Resources */,
+				7C13122B265C4EFC0056ABE8 /* lvl04_higherpath004.usdz in Resources */,
+				7C13123C265C4EFC0056ABE8 /* lvl05_ground005.usdz in Resources */,
 				7C8D5C0A263D1F7C0016D837 /* Main.storyboard in Resources */,
+				7C131254265C4EFC0056ABE8 /* lvl02_ground001.usdz in Resources */,
+				7C8B4B852647162F0073BCAE /* circle_effect.usdz in Resources */,
+				7C131256265C4EFC0056ABE8 /* lvl05_higherpath004.usdz in Resources */,
+				7C13123F265C4EFC0056ABE8 /* lvl01_ground003.usdz in Resources */,
+				7C8B4B802647161A0073BCAE /* launcher_lvl3.usdz in Resources */,
+				7C131232265C4EFC0056ABE8 /* lvl03_ground003.usdz in Resources */,
+				7C131264265C4F870056ABE8 /* bomb.wav in Resources */,
+				7C13124B265C4EFC0056ABE8 /* lvl06_higherpath002.usdz in Resources */,
+				7C131244265C4EFC0056ABE8 /* lvl06_ground002.usdz in Resources */,
+				7C131241265C4EFC0056ABE8 /* lvl04_ground005.usdz in Resources */,
+				7C131242265C4EFC0056ABE8 /* lvl04_higherpath003.usdz in Resources */,
+				7C13122D265C4EFC0056ABE8 /* lvl01_ground005.usdz in Resources */,
+				7C8B4B7F2647161A0073BCAE /* barracks_lvl2.usdz in Resources */,
+				7C131240265C4EFC0056ABE8 /* lvl01_ground002.usdz in Resources */,
+				7C131247265C4EFC0056ABE8 /* lvl03_ground005.usdz in Resources */,
+				7C8B4B88264716340073BCAE /* path_downwards.usdz in Resources */,
+				7C131230265C4EFC0056ABE8 /* lvl06_ground005.usdz in Resources */,
+				7CDE5BD426805AD4007CDEB5 /* tower_placing.usdz in Resources */,
+				7C8B4B7D2647161A0073BCAE /* barracks_lvl3.usdz in Resources */,
+				7C131265265C4F870056ABE8 /* missile.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,8 +796,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C8D5C05263D1F7C0016D837 /* GameViewController.swift in Sources */,
+				7C8D5C1E263DA0080016D837 /* MenuViewModel.swift in Sources */,
+				7C8D5C2D263DA9020016D837 /* Bundle+Enums.swift in Sources */,
+				7C8D5C33263DA9310016D837 /* PlacingBundle.swift in Sources */,
+				7C1311FA265C4E860056ABE8 /* AudioHandler.swift in Sources */,
+				7C8D5C532640AFC30016D837 /* GameViewModel+Enums.swift in Sources */,
+				7C13126B265C52D40056ABE8 /* FocusView.swift in Sources */,
+				7C8D5C37263DA93C0016D837 /* UnitBundle.swift in Sources */,
+				7C8D5C3F263DD1080016D837 /* GameViewController.swift in Sources */,
+				7C8D5C3A263DB8330016D837 /* MenuViewModelProtocol.swift in Sources */,
+				7C8D5C522640AFC00016D837 /* GameViewModel.swift in Sources */,
+				7C8D5C35263DA9360016D837 /* TowerBundle.swift in Sources */,
+				7C8D5C43263DDE4F0016D837 /* CellProtocol.swift in Sources */,
+				7C131183264FDD910056ABE8 /* StripViewCell.swift in Sources */,
+				7C8D5C30263DA9280016D837 /* ModelBundle.swift in Sources */,
+				7C8D5C592644697F0016D837 /* TowerEnciclopediaViewCell.swift in Sources */,
+				7C8D5C4B2640798C0016D837 /* HeaderTableViewCell.swift in Sources */,
+				7C8D5C36263DA9390016D837 /* TroopBundle.swift in Sources */,
+				7C8D5C05263D1F7C0016D837 /* GameViewController+TableViewDataSourceDelegate.swift in Sources */,
+				7C8B4B522646C17D0073BCAE /* SettingsViewCell.swift in Sources */,
+				7C8B4B552646CB3E0073BCAE /* UserDefaults+Enum.swift in Sources */,
+				7C8D5C32263DA92E0016D837 /* CreepBundle.swift in Sources */,
+				7C8D5C45263DDE7D0016D837 /* MenuTableViewCell.swift in Sources */,
 				7C8D5C03263D1F7C0016D837 /* AppDelegate.swift in Sources */,
+				7C8D5C34263DA9340016D837 /* SpawnBundle.swift in Sources */,
+				7C8D5C2F263DA9020016D837 /* Map.swift in Sources */,
+				7C8B4B93264717850073BCAE /* GameViewController+MultipeerHelperDelegate.swift in Sources */,
+				7C8D5C5B2644698F0016D837 /* CreepEnciclopediaViewCell.swift in Sources */,
+				7C8B4B782646E1A20073BCAE /* GameConfig.swift in Sources */,
+				7C8D5C3C263DC1D80016D837 /* MenuViewModel+Enums.swift in Sources */,
+				7C8D5C2C263DA9020016D837 /* Utils.swift in Sources */,
+				7C8D5C31263DA92B0016D837 /* AmmoBundle.swift in Sources */,
+				7C8D5C542640AFC60016D837 /* GameViewModelProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +974,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 438BTGM47G;
 				INFOPLIST_FILE = ARTowerDefense/Info.plist;
@@ -322,8 +983,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.daragonor.workshop.ARTowerDefense;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daragonor.artd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -334,6 +996,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 438BTGM47G;
 				INFOPLIST_FILE = ARTowerDefense/Info.plist;
@@ -342,8 +1005,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.daragonor.workshop.ARTowerDefense;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daragonor.artd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -371,6 +1035,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C8B4B942649DD940073BCAE /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
+		7C8D5C1A263D6DD90016D837 /* XCRemoteSwiftPackageReference "MultipeerHelper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/MultipeerHelper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7C8B4B952649DD950073BCAE /* FocusEntity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C8B4B942649DD940073BCAE /* XCRemoteSwiftPackageReference "FocusEntity" */;
+			productName = FocusEntity;
+		};
+		7C8D5C1B263D6DD90016D837 /* MultipeerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C8D5C1A263D6DD90016D837 /* XCRemoteSwiftPackageReference "MultipeerHelper" */;
+			productName = MultipeerHelper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7C8D5BF7263D1F7C0016D837 /* Project object */;
 }
